@@ -1,0 +1,35 @@
+{   
+	"parent": "block/block",
+    "ambientocclusion": false,
+    "textures": {
+        "base": "melodycraft:blocks/arcade_base",
+        "screen": "melodycraft:blocks/arcade_screen",
+        "top": "melodycraft:blocks/arcade_top"
+    },
+    "elements": [
+        {   "__comment": "top",
+            "from": [ 4,8,11 ],
+            "to": [ 12,16,12 ],
+            "faces": {
+                "down":  { "uv": [ 0,0,16,2 ], "texture": "#base" },
+                "up":    { "uv": [ 0,0,16,2  ], "texture": "#base" },
+                "north": { "uv": [ 0,0,16,16 ], "texture": "#screen" },
+                "south": { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "west":  { "uv": [ 0,0,2,16 ], "texture": "#base" },
+                "east":  { "uv": [ 0,0,2,16 ], "texture": "#base" }
+            }
+        },
+        {   "__comment": "bot",
+            "from": [ 4,0,4 ],
+            "to": [ 12,8,12 ],
+            "faces": {
+                "down":  { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "up":    { "uv": [ 0,0,16,16  ], "texture": "#top" },
+                "north": { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "south": { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "west":  { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "east":  { "uv": [ 0,0,16,16 ], "texture": "#base" }
+            }
+        }
+	]
+}

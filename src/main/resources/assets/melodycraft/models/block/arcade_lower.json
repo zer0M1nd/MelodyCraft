@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "melodycraft:blocks/arcade_top",
+        "front": "melodycraft:blocks/arcade_base",
+        "side": "melodycraft:blocks/arcade_base"
+    }
+}
