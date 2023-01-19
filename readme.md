@@ -10,9 +10,9 @@
 
 - clone 此仓库
 
-- clone HCIU's Utils
+- clone [HCIU's Utils](https://github.com/zer0M1nd/HCIUUtils)
 
-- gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都要
+- gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要
 
 - 将两个仓库都导入进 eclipse
 
@@ -30,7 +30,7 @@
 
 - 使用指令 /mec convert 然后选择一个文件夹，可以将这个文件夹的 malody 谱面转换为 MelodyCraft 的谱面，并放在默认文件夹下。
 
-- 在 仓库里扔了一些 melodycraft 的谱面和它们的原谱面，如果你急需测试可以直接下载。谱面从作者本人的 Malody 里直接抠的，如有侵权请联系删除。
+- 在 [MelodyCraft-Maps](https://github.com/zer0M1nd/MelodyCraft-Maps) 仓库里扔了一些 melodycraft 的谱面和它们的原谱面，如果你急需测试可以直接下载。谱面从作者本人的 Malody 里直接抠的，如有侵权请联系删除。
 
 ## 如何打歌
 
