@@ -1,0 +1,23 @@
+{   
+	"parent": "block/block",
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "melodycraft:blocks/arcade_base",
+        "base": "melodycraft:blocks/arcade_base",
+        "screen": "melodycraft:blocks/arcade_screen"
+    },
+    "elements": [
+        {   "__comment": "x",
+            "from": [ 0,0,14 ],
+            "to": [ 16,16,16 ],
+            "faces": {
+                "down":  { "uv": [ 0,0,16,2 ], "texture": "#base" },
+                "up":    { "uv": [ 0,0,16,2  ], "texture": "#base" },
+                "north": { "uv": [ 0,0,16,16 ], "texture": "#screen" },
+                "south": { "uv": [ 0,0,16,16 ], "texture": "#base" },
+                "west":  { "uv": [ 0,0,2,16 ], "texture": "#base" },
+                "east":  { "uv": [ 0,0,2,16 ], "texture": "#base" }
+            }
+        }
+	]
+}

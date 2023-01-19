@@ -1,0 +1,45 @@
+charttype.4k=4K
+charttype.5k=5K
+charttype.6k=6K
+charttype.7k=7K
+
+command.convert.success=导入成功！
+command.convert.fail=导入失败，请查看控制台输出日志！
+command.reload=重载成功！
+
+itemGroup.melodycraft=MelodyCraft
+
+tile.arcade.name=MelodyCraft 街机
+
+gui.singleplayer=单人游戏
+
+gui.next=选择
+gui.back=返回
+gui.searchsong=搜索歌曲...
+gui.preview=预览
+gui.stoppreview=停止预览
+gui.judge=判定难度
+
+gui.artist=曲师: %s
+gui.bpm=BPM: %s
+gui.date=添加日期: %s
+
+gui.author=谱师：%s
+gui.mode=模式：%s
+gui.difficulty=难度：%s
+gui.startgame=开始游戏
+
+gui.paused=游戏暂停
+gui.button.pause=暂停
+gui.button.resume=继续
+gui.button.restart=重新开始
+gui.button.quit=退出
+
+gui.list.top=▲▲
+gui.list.up=▲
+gui.list.down=▼
+gui.list.bottom=▼▼
+
+gui.button.left=◄
+gui.button.right=►
+gui.button.finish=完成

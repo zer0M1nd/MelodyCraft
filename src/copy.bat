@@ -1,0 +1,1 @@
+xcopy main\resources\*.* ..\bin /s /y

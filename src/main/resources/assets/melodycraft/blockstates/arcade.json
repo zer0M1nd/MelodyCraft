@@ -1,0 +1,19 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"facing": {
+			"east": {"y" : 90},
+			"north": {"y" : 0},
+			"south": {"y" : 180},
+			"west": {"y" : 270}
+		},
+		"upper": {
+			"true": {
+				"model": "melodycraft:arcade_upper"
+			},
+			"false": {
+				"model": "melodycraft:arcade_lower"
+			}
+		}
+    }
+}
