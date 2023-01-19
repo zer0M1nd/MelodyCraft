@@ -13,6 +13,8 @@
 - clone [HCIU's Utils](https://github.com/zer0M1nd/HCIUUtils)
 
   - 已经被屑翱翔内置进去了
+  
+- 屑CZM还使用了一个与json有关的类库，在libs里
 
 - gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要
 
