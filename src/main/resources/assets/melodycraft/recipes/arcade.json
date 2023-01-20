@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "OGO",
+    "OBO",
+    "ORO"
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict", "ore": "paneGlass"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "B": {
+      "item": "minecraft:stone_button"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "melodycraft:arcade"
+  }
+}

@@ -22,7 +22,6 @@ public class BlockList {
 
 	private static void registerBlock(Block block) {
 		ForgeRegistries.BLOCKS.register(block);
-		ForgeRegistries.BLOCKS.register(block);
 	}
 
 	private static void registerBlockAndItem(Block block) {
