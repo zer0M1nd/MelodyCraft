@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hciu.pub.mcmod.melodycraft.utils.ReflectionHelper;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.util.ResourceLocation;
 
 public class ExternalTextureManager {
 

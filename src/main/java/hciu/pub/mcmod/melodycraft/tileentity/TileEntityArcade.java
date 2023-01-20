@@ -1,8 +1,6 @@
 package hciu.pub.mcmod.melodycraft.tileentity;
 
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGame;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityArcade extends TileEntity {

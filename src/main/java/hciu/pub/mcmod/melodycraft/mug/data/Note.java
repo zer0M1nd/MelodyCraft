@@ -1,7 +1,5 @@
 package hciu.pub.mcmod.melodycraft.mug.data;
 
-import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteKeyMode;
-
 abstract public class Note {
 
 	protected long time;

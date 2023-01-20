@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
-import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
 import hciu.pub.mcmod.melodycraft.mug.data.Note;
 import hciu.pub.mcmod.melodycraft.mug.data.NoteInPlay;
-import hciu.pub.mcmod.melodycraft.mug.data.NoteInPlay.NoteKeyModeLongInPlay;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 
 public abstract class MelodyCraftGame {
 

@@ -1,7 +1,6 @@
 package hciu.pub.mcmod.melodycraft.block;
 
 import hciu.pub.mcmod.melodycraft.client.gui.GuiMain;
-import hciu.pub.mcmod.melodycraft.creativetab.CreativeTabMelodyCraft;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

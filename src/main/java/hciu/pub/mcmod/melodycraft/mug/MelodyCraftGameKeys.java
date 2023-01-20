@@ -1,9 +1,5 @@
 package hciu.pub.mcmod.melodycraft.mug;
 
-import com.google.common.collect.Lists;
-
-import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
-import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.NoteInPlay.NoteKeyModeLongInPlay;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,9 +41,12 @@ public class MelodyCraftGameKeys extends MelodyCraftGame {
 		if (judge == EnumJudge.MISS) {
 			modifyPerformance(-25.0);
 			combo = 0;
+			if (notes.get(id) instanceof NoteKeyModeLongInPlay) {
+				((NoteKeyModeLongInPlay<?>) notes.get(id)).setMissed(true);
+			}
 		} else {
-			modifyPerformance(0.25);
 			addCombo();
+			modifyPerformance(0.25);
 			score += (int) ((1000 - judge.ordinal() * 200) * (1 + performance / 100));
 		}
 		lastJudgeLate = late;
@@ -61,6 +60,7 @@ public class MelodyCraftGameKeys extends MelodyCraftGame {
 		if (judge == EnumJudge.MISS) {
 			modifyPerformance(-25.0);
 			combo = 0;
+			((NoteKeyModeLongInPlay<?>) notes.get(id)).setMissed(true);
 		} else {
 			addCombo();
 			modifyPerformance(0.25);

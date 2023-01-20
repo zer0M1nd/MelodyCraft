@@ -17,7 +17,7 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		BlockList.registerAllBlocks();
 		ItemList.registerAllItems();
-		
+
 		GameRegistry.registerTileEntity(TileEntityArcade.class, new ResourceLocation(MelodyCraftMod.MODID, "arcade"));
 	}
 

@@ -1,21 +1,10 @@
 package hciu.pub.mcmod.melodycraft.network;
 
-import java.util.UUID;
-
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -56,7 +45,7 @@ public class CMessageStartGameRequest implements IMessage {
 			World world = MelodyCraftMod.getMcServer().getWorld(msg.worldId);
 			BlockPos pos = msg.pos;
 			if (world.getTileEntity(pos) instanceof TileEntityArcade) {
-				
+
 			}
 			return null;
 		}

@@ -1,5 +1,7 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
+import org.lwjgl.input.Keyboard;
+
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
@@ -84,6 +86,8 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		});
 		buttonSelectJudge.setText(I18n.format("gui.judge"));
 		addComponent(screenSelectJudge = new SubGuiScreenSelectJudge(null, this));
+
+		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
 
 	private void startGame(Song song, Chart chart, MelodyCraftGameSettings settings) {
