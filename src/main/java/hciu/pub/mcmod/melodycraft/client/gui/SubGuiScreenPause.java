@@ -22,13 +22,25 @@ public class SubGuiScreenPause extends SmartGuiComponentBase {
 	private GuiMelodyCraftButton restart;
 	private GuiMelodyCraftButton quit;
 
+	public GuiMelodyCraftButton getButtonResume() {
+		return resume;
+	}
+
+	public GuiMelodyCraftButton getButtonRestart() {
+		return restart;
+	}
+
+	public GuiMelodyCraftButton getButtonQuit() {
+		return quit;
+	}
+
 	public SubGuiScreenPause(SmartGuiScreen parent, GuiGame holder0, GuiMelodyCraftClient game) {
 		super(holder0);
 		setTextureDrawer(new FramedRectangleDrawer<SubGuiScreenPause>(this, GuiMelodyCraftConstants.COLOR_MAIN_FRAME,
 				GuiMelodyCraftConstants.COLOR_MAIN_IN, 2));
 		this.setVisible(false);
 		addComponent(paused = new SmartGuiTextLabel(this));
-		
+
 		addComponent(resume = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {

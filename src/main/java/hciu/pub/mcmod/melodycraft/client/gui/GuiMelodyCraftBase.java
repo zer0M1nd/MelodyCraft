@@ -2,7 +2,6 @@ package hciu.pub.mcmod.melodycraft.client.gui;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
-
 public class GuiMelodyCraftBase extends SmartGuiScreen {
 
 	public GuiMelodyCraftBase(SmartGuiScreen parent) {

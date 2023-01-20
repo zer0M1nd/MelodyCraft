@@ -43,6 +43,7 @@ abstract public class NoteInPlay<T extends Note> {
 	public static class NoteKeyModeLongInPlay<T extends NoteKeyModeLong> extends NoteKeyModeInPlay<T> {
 		protected boolean isHeadVisited = false;
 		protected int judgedCount = 0;
+		protected boolean isMissed = false;
 
 		public NoteKeyModeLongInPlay(T note, int id) {
 			super(note, id);
@@ -70,6 +71,14 @@ abstract public class NoteInPlay<T extends Note> {
 
 		public boolean isFullyJudged() {
 			return judgedCount >= note.getComboCount() - 2;
+		}
+		
+		public boolean isMissed() {
+			return isMissed;
+		}
+		
+		public void setMissed(boolean isMissed) {
+			this.isMissed = isMissed;
 		}
 	}
 

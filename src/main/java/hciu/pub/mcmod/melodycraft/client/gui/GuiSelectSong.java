@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import org.lwjgl.input.Keyboard;
+
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;
@@ -108,6 +110,7 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 
 		});
 		textSearch.setDefaultText(I18n.format("gui.searchsong"));
+		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
 
 	@Override

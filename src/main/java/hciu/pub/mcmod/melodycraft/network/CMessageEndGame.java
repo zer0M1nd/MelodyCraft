@@ -45,7 +45,7 @@ public class CMessageEndGame implements IMessage {
 			World world = MelodyCraftMod.getMcServer().getWorld(msg.worldId);
 			BlockPos pos = msg.pos;
 			if (world.getTileEntity(pos) instanceof TileEntityArcade) {
-				// TODO
+
 			}
 			return null;
 		}
