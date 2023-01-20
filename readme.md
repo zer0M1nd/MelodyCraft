@@ -8,19 +8,15 @@
 
 ## 如何编译
 
-- clone 此仓库
+- clone 此仓库并导入到 IDE
 
-- clone [HCIU's Utils](https://github.com/zer0M1nd/HCIUUtils)
-
-- gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要
+- gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要（总之就是搭建环境）
 
 - 将两个仓库都导入进 eclipse
 
-- 将 HCIU's Utils 加入该项目的 Build Path
-
 - 将 libs 里的包都加入该项目的 Build Path
 
-- 现在你应该可以在 Eclipse 里编译运行了。如果你需要导出，请将 HCIU's Utils 打包（直接 eclipse 打包即可，不需要 gradlew build），扔进 libs 里。
+- 现在你应该可以在 Eclipse 里编译运行了。使用其它IDE的请灵活处理
 
 ## 添加谱面
 
