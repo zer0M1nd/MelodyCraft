@@ -7,8 +7,6 @@ public class MelodyCraftGameSettingsClient {
 	private int[] keyBindings = new int[] { Keyboard.KEY_A, Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_SPACE,
 			Keyboard.KEY_L, Keyboard.KEY_SEMICOLON, Keyboard.KEY_APOSTROPHE };
 
-	private int[] keyBindingsAdjust = new int[] { Keyboard.KEY_UP, Keyboard.KEY_DOWN };
-
 	private int delay = 300, hitdelay = 0;
 	private boolean noRender = false, noSound = true;
 
@@ -47,10 +45,6 @@ public class MelodyCraftGameSettingsClient {
 	
 	public void setDelay(int delay) {
 		this.delay = delay;
-	}
-
-	public int[] getKeyBindingsAdjust() {
-		return keyBindingsAdjust;
 	}
 
 }

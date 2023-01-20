@@ -40,6 +40,7 @@ public class SubGuiScreenPause extends SmartGuiComponentBase {
 				GuiMelodyCraftConstants.COLOR_MAIN_IN, 2));
 		this.setVisible(false);
 		addComponent(paused = new SmartGuiTextLabel(this));
+		paused.setCentered(true);
 
 		addComponent(resume = new GuiMelodyCraftButton(this) {
 			@Override

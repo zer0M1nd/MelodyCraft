@@ -379,7 +379,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		}
 		long now = getGameTime();
 		if (now > -clientSettings.getDelay() + getGame().getChart().getDelay() && currentlyPlaying == null) {
-			//System.out.println(getGame().getChart().getDelay());
+			// System.out.println(getGame().getChart().getDelay());
 			currentlyPlaying = ExternalSoundHandler.getInstance().playSound(getGame().getSong());
 			setGameTime(-clientSettings.getDelay() + getGame().getChart().getDelay());
 		}
@@ -430,11 +430,14 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		if (Keyboard.isRepeatEvent()) {
 			return;
 		}
-		int[] tweak = clientSettings.getKeyBindingsAdjust();
-		if (keyCode == tweak[0] || keyCode == tweak[1]) {
-			boolean plus = keyCode == tweak[0];
-			int newDelay = clientSettings.getDelay() + (plus ? 10 : -10);
-			setGameTime(getGameTime() - (plus ? 10 : -10));
+		if (keyCode == Keyboard.KEY_UP || keyCode == Keyboard.KEY_DOWN) {
+			boolean plus = keyCode == Keyboard.KEY_UP;
+			int p = plus ? 10 : -10;
+			if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+				p = p / 10;
+			}
+			int newDelay = clientSettings.getDelay() + p;
+			setGameTime(getGameTime() - p);
 			clientSettings.setDelay(newDelay);
 			addTempInfo("Client delay changed to " + newDelay + " ms", 5000);
 		}
