@@ -8,11 +8,11 @@
 
 ## 如何编译
 
-- clone 此仓库并导入到 IDE
+- clone 此仓库
 
-- gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要（总之就是搭建环境）
+- gradlew setUpDecompWorkspace & gradlew eclipse（总之就是搭建环境）
 
-- 将两个仓库都导入进 eclipse
+- 导入到 IDE
 
 - 将 libs 里的包都加入该项目的 Build Path
 
