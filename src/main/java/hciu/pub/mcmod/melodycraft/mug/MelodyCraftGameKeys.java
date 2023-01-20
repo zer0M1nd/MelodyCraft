@@ -1,9 +1,5 @@
 package hciu.pub.mcmod.melodycraft.mug;
 
-import com.google.common.collect.Lists;
-
-import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
-import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.NoteInPlay.NoteKeyModeLongInPlay;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.entity.player.EntityPlayer;

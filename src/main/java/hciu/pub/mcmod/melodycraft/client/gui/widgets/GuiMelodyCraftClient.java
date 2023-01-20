@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
-import hciu.pub.mcmod.melodycraft.client.gui.SubGuiScreenPause;
-import hciu.pub.mcmod.melodycraft.client.gui.SubGuiScreenSelectJudge;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGame;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;

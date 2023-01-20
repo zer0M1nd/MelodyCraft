@@ -20,6 +20,8 @@
 
 - 将 libs 里的包都加入该项目的 Build Path
 
+- 现在你应该可以在 Eclipse 里编译运行了。如果你需要导出，请将 HCIU's Utils 打包（直接 eclipse 打包即可，不需要 gradlew build），扔进 libs 里。
+
 ## 添加谱面
 
 - 谱面格式暂时懒得写，想了解谱面格式可以去翻源代码

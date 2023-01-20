@@ -1,0 +1,45 @@
+charttype.4k=4K
+charttype.5k=5K
+charttype.6k=6K
+charttype.7k=7K
+
+command.convert.success=Convert successful!
+command.convert.fail=Convert failed, check the console output log!
+command.reload=Reload successful!
+
+itemGroup.melodycraft=MelodyCraft
+
+tile.arcade.name=MelodyCraft Arcade
+
+gui.singleplayer=Singleplayer
+
+gui.next=Next
+gui.back=Back
+gui.searchsong=Search...
+gui.preview=Preview
+gui.stoppreview=Stop Preview
+gui.judge=Judge difficulty
+
+gui.artist=Artist:%s
+gui.bpm=BPM: %s
+gui.date=Addition date:%s
+
+gui.author=Author:%s
+gui.mode=Mode:%s
+gui.difficulty=Difficulty:%s
+gui.startgame=Game Start
+
+gui.paused=PAUSE
+gui.button.pause=Pause
+gui.button.resume=Resume
+gui.button.restart=Restart
+gui.button.quit=Quit
+
+gui.list.top=▲▲
+gui.list.up=▲
+gui.list.down=▼
+gui.list.bottom=▼▼
+
+gui.button.left=◄
+gui.button.right=►
+gui.button.finish=完成

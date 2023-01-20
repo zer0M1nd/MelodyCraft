@@ -1,7 +1,5 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
-import java.io.File;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +7,6 @@ import java.util.function.Predicate;
 
 import org.lwjgl.input.Keyboard;
 
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiConstants;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;
@@ -17,15 +14,11 @@ import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftSimpleList;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftTextField;
-import hciu.pub.mcmod.melodycraft.client.render.ExternalTexture;
-import hciu.pub.mcmod.melodycraft.client.render.ExternalTextureManager;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
 import hciu.pub.mcmod.melodycraft.mug.data.SongList;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
-import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
 public class GuiSelectSong extends GuiMelodyCraftBase {
@@ -117,7 +110,6 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 
 		});
 		textSearch.setDefaultText(I18n.format("gui.searchsong"));
-		
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
 

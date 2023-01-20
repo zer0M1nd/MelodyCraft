@@ -4,7 +4,6 @@ import java.io.File;
 
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiPictureBox;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiMelodyCraftPictureBox extends SmartGuiPictureBox {
 

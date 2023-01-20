@@ -121,6 +121,7 @@ public class Song {
 				if (arr.length == 1) {
 					props.put(arr[0], "undefined");
 				} else if (arr.length != 2) {
+					sc.close();
 					throw new IllegalArgumentException("Not enough or too many = signs!");
 				} else {
 					props.put(arr[0], arr[1]);

@@ -5,7 +5,6 @@ import net.minecraftforge.client.event.sound.SoundSetupEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import paulscode.sound.SoundSystemConfig;
 import paulscode.sound.SoundSystemException;
-import paulscode.sound.codecs.CodecJOrbis;
 import paulscode.sound.codecs.CodecWav;
 
 public class EventSound {

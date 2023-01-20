@@ -17,13 +17,11 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		BlockList.registerAllBlocks();
 		ItemList.registerAllItems();
-		
+
 		GameRegistry.registerTileEntity(TileEntityArcade.class, new ResourceLocation(MelodyCraftMod.MODID, "arcade"));
 	}
 
 	public void init(FMLInitializationEvent event) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
@@ -32,7 +30,6 @@ public class CommonProxy {
 	}
 
 	public void onStart(FMLServerStartingEvent e) {
-		// TODO Auto-generated method stub
 		if(!MelodyCraftMod.isClient()) {
 			e.registerServerCommand(new CommandMelodyCraft());
 		}

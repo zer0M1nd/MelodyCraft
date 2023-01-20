@@ -2,22 +2,16 @@ package hciu.pub.mcmod.melodycraft.mug.data;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.commons.codec.digest.Md5Crypt;
-
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
 abstract public class Chart {
@@ -97,6 +91,7 @@ abstract public class Chart {
 				if (arr.length == 1) {
 					props.put(arr[0], "undefined");
 				} else if (arr.length != 2) {
+					sc.close();
 					throw new IllegalArgumentException("Not enough or too many = signs!");
 				} else {
 					props.put(arr[0], arr[1]);
@@ -108,9 +103,11 @@ abstract public class Chart {
 				chart = new ChartKeyMode();
 				((ChartKeyMode) chart).keys = Integer.parseInt(props.get("keys"));
 				if (((ChartKeyMode) chart).keys < 4 || ((ChartKeyMode) chart).keys > 7) {
+					sc.close();
 					throw new IllegalArgumentException("Currently only support 4-7K in key mode!");
 				}
 			} else {
+				sc.close();
 				throw new IllegalArgumentException("Unknown or undefined chart type!");
 			}
 			chart.file = file;

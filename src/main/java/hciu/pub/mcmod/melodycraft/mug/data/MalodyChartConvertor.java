@@ -1,19 +1,14 @@
 package hciu.pub.mcmod.melodycraft.mug.data;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 

@@ -42,8 +42,8 @@ abstract public class NoteInPlay<T extends Note> {
 
 	public static class NoteKeyModeLongInPlay<T extends NoteKeyModeLong> extends NoteKeyModeInPlay<T> {
 		protected boolean isHeadVisited = false;
-		protected boolean isMissed = false;
 		protected int judgedCount = 0;
+		protected boolean isMissed = false;
 
 		public NoteKeyModeLongInPlay(T note, int id) {
 			super(note, id);
