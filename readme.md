@@ -10,8 +10,6 @@
 
 - clone 此仓库
 
-- clone [HCIU's Utils](https://github.com/zer0M1nd/HCIUUtils)
-
 - gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要
 
 - 将两个仓库都导入进 eclipse

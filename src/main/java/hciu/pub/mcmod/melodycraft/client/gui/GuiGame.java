@@ -6,9 +6,11 @@ import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClient;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClientKeys;
+import hciu.pub.mcmod.melodycraft.mug.EnumGameState;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameKeys;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
 public class GuiGame extends GuiMelodyCraftBase {
