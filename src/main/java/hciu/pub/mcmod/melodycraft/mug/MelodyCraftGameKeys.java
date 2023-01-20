@@ -84,4 +84,8 @@ public class MelodyCraftGameKeys extends MelodyCraftGame {
 	public MelodyCraftGame newGame() {
 		return new MelodyCraftGameKeys(tileEntity, song, getChart(), settings, player, side);
 	}
+	
+	public String getGameModeName() {
+		return laneState.length + "K";
+	}
 }

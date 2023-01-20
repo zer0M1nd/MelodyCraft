@@ -33,13 +33,13 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	private LinkedList<NoteInPlay<?>> notes;
 	private LinearInterpolation timings = null;
 
-	private double speed = 2;
-
 	private String tempInfo = "";
 	private long tempInfoStarted = 0;
 	private long tempInfoRemaining = 0;
 
 	private GuiMelodyCraftPictureBox pictureBg;
+	
+	private int[] keyBindings;
 
 	public GuiMelodyCraftClientKeys(ISmartGuiComponent holder, MelodyCraftGameKeys game,
 			MelodyCraftGameSettingsClient clientSettings) {
@@ -49,20 +49,20 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		initialize();
 		startGame();
 
-		speed = game.getSettings().getSpeed();
-
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
 		if (game.getSong().getBgfile() == null) {
 			pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
 		} else {
 			pictureBg.setTexture(game.getSong().getBgfile(), 0, 0, 256, 256);
 		}
+		
+		keyBindings = clientSettings.getKeyBindingForMode(this.getGame().getGameModeName());
 
 	}
 
 	private double getPlace(long l) {
 		// System.out.println("time " + l + " place " + timings.get(l));
-		return timings.get(l) * speed;
+		return timings.get(l);
 	}
 
 	private void initialize() {
@@ -81,8 +81,8 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			}
 		}
 		double lasttime = 0, lastplace = 0, lastf = 1;
-		double def = getGame().getSettings().getSpeed() * 50 / 1000;
-		double[] x = new double[notesTiming.size() + 2], y = new double[notesTiming.size() + 2];
+		double def = getGame().getSettings().speedFactor() * 50 / 1000;
+		double[] x = new double[notesTiming.size() + 1], y = new double[notesTiming.size() + 1];
 		int i = 0;
 		for (NoteInPlay<?> note : notesTiming) {
 			x[i] = note.getNote().getTime();
@@ -311,14 +311,10 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	}
 
-	private static final int[][] KEY_BINDING_MAP = new int[][] { { -1, 0, 1, -1, 2, 3, -1 }, { -1, 0, 1, 2, 3, 4, -1 },
-			{ 0, 1, 2, -1, 3, 4, 5 }, { 0, 1, 2, 3, 4, 5, 6 } };
-
 	public int getLaneForKey(int keyCode) {
-		int[] keyBindings = clientSettings.getKeyBindings();
 		for (int i = 0; i < keyBindings.length; i++) {
 			if (keyCode == keyBindings[i]) {
-				return KEY_BINDING_MAP[getGame().getKeys() - 4][i];
+				return i;
 			}
 		}
 		return -1;

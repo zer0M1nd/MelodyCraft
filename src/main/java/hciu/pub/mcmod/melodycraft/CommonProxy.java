@@ -2,6 +2,7 @@ package hciu.pub.mcmod.melodycraft;
 
 import hciu.pub.mcmod.melodycraft.block.BlockList;
 import hciu.pub.mcmod.melodycraft.command.CommandMelodyCraft;
+import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import hciu.pub.mcmod.melodycraft.item.ItemList;
 import hciu.pub.mcmod.melodycraft.mug.data.SongList;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
@@ -30,7 +31,7 @@ public class CommonProxy {
 	}
 
 	public void onStart(FMLServerStartingEvent e) {
-		if(!MelodyCraftMod.isClient()) {
+		if (!MelodyCraftMod.isClient()) {
 			e.registerServerCommand(new CommandMelodyCraft());
 		}
 	}

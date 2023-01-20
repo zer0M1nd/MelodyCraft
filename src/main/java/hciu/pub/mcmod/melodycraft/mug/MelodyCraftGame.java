@@ -183,5 +183,9 @@ public abstract class MelodyCraftGame {
 		resume();
 		this.state = EnumGameState.ENDED;
 	}
+	
+	public String getGameModeName() {
+		return "Unknown game mode";
+	}
 
 }

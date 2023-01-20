@@ -6,6 +6,7 @@ import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftSimpleList;
+import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import hciu.pub.mcmod.melodycraft.mug.EnumGameSide;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameKeys;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettings;
@@ -24,9 +25,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 	private GuiMelodyCraftSimpleList<Chart> listChart;
 	private GuiMelodyCraftPictureBox pictureBg;
 	private SmartGuiTextLabel labelInfo;
-	private GuiMelodyCraftButton buttonSelectJudge;
-
-	private SubGuiScreenSelectJudge screenSelectJudge;
+	private GuiMelodyCraftButton buttonSettings;
 
 	private Song song;
 	private TileEntityArcade tileEntity;
@@ -38,7 +37,8 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		addComponent(buttonNext = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				startGame(song, (ChartKeyMode) listChart.getSelectedItem(), new MelodyCraftGameSettings());
+				startGame(song, (ChartKeyMode) listChart.getSelectedItem(),
+						MelodyCraftGameConfig.getInstance().getGlobal());
 			}
 		});
 		addComponent(buttonBack = new GuiMelodyCraftButton(this) {
@@ -78,14 +78,13 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		} else {
 			pictureBg.setTexture(song.getBgfile(), 0, 0, 256, 256);
 		}
-		addComponent(buttonSelectJudge = new GuiMelodyCraftButton(this) {
+		addComponent(buttonSettings = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				screenSelectJudge.setVisible(true);
+				Minecraft.getMinecraft().displayGuiScreen(new GuiSettings(getSupreme()));
 			}
 		});
-		buttonSelectJudge.setText(I18n.format("gui.judge"));
-		addComponent(screenSelectJudge = new SubGuiScreenSelectJudge(null, this));
+		buttonSettings.setText(I18n.format("gui.settings"));
 
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
@@ -99,7 +98,8 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 			throw new IllegalArgumentException("Unknown Chart Type! Unexpected!");
 		}
 		tileEntity.setGame(game);
-		Minecraft.getMinecraft().displayGuiScreen(new GuiGame(this, tileEntity, new MelodyCraftGameSettingsClient()));
+		Minecraft.getMinecraft()
+				.displayGuiScreen(new GuiGame(this, tileEntity, MelodyCraftGameConfig.getInstance().getClient()));
 	}
 
 	@Override
@@ -109,11 +109,10 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		buttonNext.setCorners(listChart.getRelativeX() + listChart.getSizeX() + 5, getSizeY() - 27, getSizeX() - 7,
 				getSizeY() - 7);
 		buttonBack.setBounds(7, 7, 50, 20);
-		buttonSelectJudge.setBounds(getSizeX() - 53, 7, 50, 20);
+		buttonSettings.setBounds(77, 7, 50, 20);
 		int bgsz = Math.min(getSizeX() / 2 - 40, getSizeY() - 45);
 		pictureBg.setBounds(30, 35, bgsz, bgsz);
 		labelInfo.setBounds(ratioX(0.5) + 110, 52, ratioX(0.5) - 125, 100);
-		screenSelectJudge.setCenterSize(ratioX(0.5), ratioY(0.5), 100,50);
 	}
 
 }

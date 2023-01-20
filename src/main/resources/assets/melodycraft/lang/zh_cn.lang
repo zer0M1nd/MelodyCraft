@@ -19,6 +19,7 @@ gui.searchsong=搜索歌曲...
 gui.preview=预览
 gui.stoppreview=停止预览
 gui.judge=判定难度
+gui.settings=设置
 
 gui.artist=曲师: %s
 gui.bpm=BPM: %s
@@ -42,4 +43,21 @@ gui.list.bottom=▼▼
 
 gui.button.left=◄
 gui.button.right=►
+gui.button.left2=◄◄
+gui.button.right2=►►
 gui.button.finish=完成
+
+
+gui.button.save=保存
+gui.button.cancel=取消保存
+
+gui.settings.title=游戏设置
+gui.settings.judge=判定难度
+gui.settings.speed=谱面流速
+gui.settings.delay=音频延迟
+gui.settings.judgedelay=判定延迟
+gui.settings.norender=游戏中取消世界渲染
+gui.settings.nosound=游戏中取消外部声音
+
+gui.settings.on=开
+gui.settings.off=关

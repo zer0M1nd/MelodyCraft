@@ -17,5 +17,11 @@ public class GuiMelodyCraftButton extends SmartGuiButton {
 								GuiMelodyCraftConstants.COLOR_BUTTON_INNER_SELECTED },
 						1)));
 	}
+	
+
+	public GuiMelodyCraftButton(ISmartGuiComponent holder, String s) {
+		this(holder);
+		setText(s);
+	}
 
 }

@@ -1,9 +1,11 @@
 package hciu.pub.mcmod.melodycraft.client;
 
 import hciu.pub.mcmod.melodycraft.CommonProxy;
+import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.client.sound.EventSound;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.command.CommandMelodyCraft;
+import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,8 +30,13 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-		ExternalSoundHandler.initialize();
 		super.postInit(event);
+		ExternalSoundHandler.initialize();
+		if (MelodyCraftGameConfig.load()) {
+			MelodyCraftMod.getLogger().info("Successfully loaded game config file.");
+		} else {
+			MelodyCraftMod.getLogger().info("Error occurred loading game config file. Replaced with default configs.");
+		}
 	}
 
 	@Override

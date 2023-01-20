@@ -30,6 +30,7 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 	private GuiMelodyCraftSimpleList<Song> listSong;
 	private GuiMelodyCraftPictureBox pictureBg;
 	private SmartGuiTextLabel labelInfo;
+	private GuiMelodyCraftButton buttonSettings;
 
 	private UUID currentlyPlaying = null;
 	private TileEntityArcade tileEntity;
@@ -111,6 +112,13 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 		});
 		textSearch.setDefaultText(I18n.format("gui.searchsong"));
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
+		addComponent(buttonSettings = new GuiMelodyCraftButton(this) {
+			@Override
+			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				Minecraft.getMinecraft().displayGuiScreen(new GuiSettings(getSupreme()));
+			}
+		});
+		buttonSettings.setText(I18n.format("gui.settings"));
 	}
 
 	@Override
@@ -124,6 +132,7 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 		listSong.setBounds(ratioX(0.5), 27, 100, getSizeY() - 34);
 		int bgsz = Math.min(getSizeX() / 2 - 40, getSizeY() - 45);
 		pictureBg.setBounds(30, 35, bgsz, bgsz);
+		buttonSettings.setBounds(77, 7, 50, 20);
 	}
 
 	public <T> List<T> filter(List<T> origin, Predicate<T> filter) {
