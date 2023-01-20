@@ -12,10 +12,6 @@
 
 - clone [HCIU's Utils](https://github.com/zer0M1nd/HCIUUtils)
 
-  - 已经被屑翱翔内置进去了
-  
-- 屑CZM还使用了一个与json有关的类库，在libs里
-
 - gradlew setUpDecompWorkspace & gradlew eclipse 两个仓库都需要
 
 - 将两个仓库都导入进 eclipse
@@ -24,11 +20,13 @@
 
 - 将 libs 里的包都加入该项目的 Build Path
 
+- 现在你应该可以在 Eclipse 里编译运行了。如果你需要导出，请将 HCIU's Utils 打包（直接 eclipse 打包即可，不需要 gradlew build），扔进 libs 里。
+
 ## 添加谱面
 
 - 谱面格式暂时懒得写，想了解谱面格式可以去翻源代码
 
-- 谱面放在 .minecraft/melodycraft 文件夹下，开发时放在run文件夹下
+- 谱面放在 .minecraft/melodycraft 文件夹下
 
 - 启动或使用指令 /mec reload 会从文件夹重新读取
 
