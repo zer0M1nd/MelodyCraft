@@ -21,6 +21,18 @@ public class SubGuiScreenPause extends SmartGuiComponentBase {
 	private GuiMelodyCraftButton resume;
 	private GuiMelodyCraftButton restart;
 	private GuiMelodyCraftButton quit;
+	
+	public GuiMelodyCraftButton getButtonResume() {
+		return resume;
+	}
+	
+	public GuiMelodyCraftButton getButtonRestart() {
+		return restart;
+	}
+	
+	public GuiMelodyCraftButton getButtonQuit() {
+		return quit;
+	}
 
 	public SubGuiScreenPause(SmartGuiScreen parent, GuiGame holder0, GuiMelodyCraftClient game) {
 		super(holder0);

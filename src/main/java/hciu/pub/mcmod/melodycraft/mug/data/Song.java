@@ -109,10 +109,6 @@ public class Song {
 		return null;
 	}
 
-	public int getDelay() {
-		return id;
-	}
-
 	private static Song loadSongInfo(File songinfo, File songfile, File bg) {
 
 		Map<String, String> props = new HashMap<>();

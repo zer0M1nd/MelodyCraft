@@ -39,6 +39,8 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	private long tempInfoStarted = 0;
 	private long tempInfoRemaining = 0;
 
+	private GuiMelodyCraftPictureBox pictureBg;
+
 	public GuiMelodyCraftClientKeys(ISmartGuiComponent holder, MelodyCraftGameKeys game,
 			MelodyCraftGameSettingsClient clientSettings) {
 		super(holder, game, clientSettings);
@@ -46,8 +48,15 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		getGame().init();
 		initialize();
 		startGame();
-		
-		// speed = game.getSettings().getSpeed();
+
+		speed = game.getSettings().getSpeed();
+
+		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
+		if (game.getSong().getBgfile() == null) {
+			pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
+		} else {
+			pictureBg.setTexture(game.getSong().getBgfile(), 0, 0, 256, 256);
+		}
 
 	}
 
@@ -118,14 +127,17 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	@Override
 	public void drawSelf() {
-		System.out.println(getGameTime() + "  " + getGamePlace());
-		onTicking();
-		drawLanes();
-		drawScoreAndAcc();
-		drawNotes();
-		drawJudgeInfo();
-		drawComboAndCurrentJudge();
-		drawTempInfo();
+		try {
+			onTicking();
+			drawLanes();
+			drawScoreAndAcc();
+			drawNotes();
+			drawJudgeInfo();
+			drawComboAndCurrentJudge();
+			drawTempInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void drawLanes() {
@@ -182,21 +194,39 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 				break;
 			}
 			if (note instanceof NoteKeyModeLongInPlay) {
+
 				NoteKeyModeLongInPlay<NoteKeyModeLong> n = (NoteKeyModeLongInPlay<NoteKeyModeLong>) note;
 				double ep = getPlace(note.getNote().getEndtime()), sp = getPlace(note.getNote().getTime());
-				int xl = n.isVisited() ? 191 : 206;
+
+				if (ep - place <= -5) {
+					continue;
+				}
+
+				int xl = 206;
+				if (n.isVisited()) {
+					if (n.isMissed()) {
+						xl = 191;
+					} else {
+						continue;
+					}
+				}
 				float from = (float) (ysz - (ep + 5 - place));
 				float to = (float) (ysz - (sp - place));
-				if (from < 0) {
-					from = 0;
+				if (from < 1) {
+					from = 1;
 				}
 				if (to > ysz) {
 					to = (float) ysz;
 				}
+				if (to - from >= 1) {
+					SmartGuiScreen.drawScaledTexturedModelRect(
+							((float) getActualX() + firstlane + 16 * n.getNote().getLane()), getActualY() + from, 15F,
+							to - from, (float) xl, 0F, 15F, 100F);
+				}
 				// System.out.println("from = " + from + " to = " + to);
-				SmartGuiScreen.drawScaledTexturedModelRect(
-						((float) getActualX() + firstlane + 16 * n.getNote().getLane()), getActualY() + from, 15F,
-						to - from, (float) xl, 0F, 15F, 100F);
+
+				sp = Math.max(sp, place);
+
 				if (sp <= place + ysz - 5 && sp - place > -5) {
 					getSupreme().drawTexturedModalRect(getActualX() + firstlane + 16 * n.getNote().getLane(),
 							getActualY() + (float) (place + ysz - 5 - sp), xl, 100, 15,
@@ -249,7 +279,6 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		if (getGameTime() - getGame().getLastJudgeTime() < 2000) {
 			double t = (1000 - (getGameTime() - getGame().getLastJudgeTime())) / 1000.0;
 			float alpha = (float) Math.max(0.5, t);
-			float size = (float) Math.max(1.0, t + 0.25);
 			GlStateManager.enableBlend();
 			GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
 			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
@@ -258,7 +287,10 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 						getGame().isLastJudgeLate() ? 135 : 126, 36, 9);
 			}
 			upper += 12;
-			getSupreme().drawTexturedModalRect(getActualX() + mid - 53.5F, getActualY() + upper, 0F,
+			float midx = getActualX() + mid, midy = getActualY() + upper + 9;
+			float size = (float) Math.max(1.0, t + 0.25);
+			float sx = 107 * size, sy = 18 * size;
+			SmartGuiScreen.drawScaledTexturedModelRect(midx - sx / 2, midy - sy / 2, sx, sy, 0F,
 					51 + 18 * getGame().getLastJudge().ordinal(), 107, 18);
 			GlStateManager.disableBlend();
 		}
@@ -346,9 +378,10 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			return;
 		}
 		long now = getGameTime();
-		if (now > -clientSettings.getDelay() && currentlyPlaying == null) {
+		if (now > -clientSettings.getDelay() + getGame().getChart().getDelay() && currentlyPlaying == null) {
+			//System.out.println(getGame().getChart().getDelay());
 			currentlyPlaying = ExternalSoundHandler.getInstance().playSound(getGame().getSong());
-			setGameTime(-clientSettings.getDelay());
+			setGameTime(-clientSettings.getDelay() + getGame().getChart().getDelay());
 		}
 		while (notes.isEmpty()) {
 			NoteKeyModeInPlay<?> nn = (NoteKeyModeInPlay<?>) notes.getFirst();
@@ -401,6 +434,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		if (keyCode == tweak[0] || keyCode == tweak[1]) {
 			boolean plus = keyCode == tweak[0];
 			int newDelay = clientSettings.getDelay() + (plus ? 10 : -10);
+			setGameTime(getGameTime() - (plus ? 10 : -10));
 			clientSettings.setDelay(newDelay);
 			addTempInfo("Client delay changed to " + newDelay + " ms", 5000);
 		}
@@ -463,4 +497,9 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		getGame().judgeNote(note.getId(), result, false);
 	}
 
+	@Override
+	public void onResizeSelf() {
+		int bgsz = Math.min(ratioX(0.5) - 40, getSizeY() - 45);
+		pictureBg.setBounds(30 + ratioX(0.5), 35, bgsz, bgsz);
+	}
 }

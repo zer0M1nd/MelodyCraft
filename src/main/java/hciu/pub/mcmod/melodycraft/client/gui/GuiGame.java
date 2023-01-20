@@ -6,6 +6,7 @@ import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClient;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClientKeys;
+import hciu.pub.mcmod.melodycraft.mug.EnumGameState;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGame;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameKeys;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
@@ -40,13 +41,26 @@ public class GuiGame extends GuiMelodyCraftBase {
 		addComponent(pause = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				screenPause.setVisible(true);
-				gameClient.pause();
+				if(gameClient.getGame().getState() == EnumGameState.PAUSED) {
+					screenPause.setVisible(false);
+					gameClient.resume();
+				}else {
+					screenPause.setVisible(true);
+					gameClient.pause();
+				}
 			}
 		});
 
 		pause.setText(I18n.format("gui.button.pause"));
 		pause.setVisible(true);
+
+		addKeyBinding(Keyboard.KEY_F1, pause, false);
+		addKeyBinding(Keyboard.KEY_F2, screenPause.getButtonRestart(), false);
+		addKeyBinding(Keyboard.KEY_F3, screenPause.getButtonQuit(), false);
+
+		if(clientSettings.isNoSound()) {
+			Minecraft.getMinecraft().getSoundHandler().pauseSounds();
+		}
 
 	}
 
@@ -64,14 +78,6 @@ public class GuiGame extends GuiMelodyCraftBase {
 		setFocus(gameClient);
 	}
 
-	@Override
-	public void onKeyPressed(char typedChar, int keyCode) {
-		if (keyCode == Keyboard.KEY_F1) {
-			pause.onMouseClicked(0, 0, 0);
-		} else {
-			super.onKeyPressed(typedChar, keyCode);
-		}
-	}
 
 	public TileEntityArcade getTileEntity() {
 		return tileEntity;
@@ -79,5 +85,13 @@ public class GuiGame extends GuiMelodyCraftBase {
 
 	public MelodyCraftGameSettingsClient getClientSettings() {
 		return clientSettings;
+	}
+	
+	@Override
+	public void onGuiClosed() {
+		if(clientSettings.isNoSound()) {
+			Minecraft.getMinecraft().getSoundHandler().resumeSounds();
+		}
+		super.onGuiClosed();
 	}
 }
