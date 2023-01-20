@@ -33,8 +33,9 @@ public class BlockArcade extends BlockContainer {
 
 	public BlockArcade() {
 		super(Material.IRON);
-		this.setCreativeTab(CreativeTabMelodyCraft.MELODYCRAFT_TAB).setRegistryName("arcade").setUnlocalizedName("arcade")
+		this.setRegistryName("arcade").setUnlocalizedName("arcade")
 				.setHardness(6).setResistance(5).setHarvestLevel("pickaxe", 2);
+		this.setCreativeTab(CreativeTabMelodyCraft.MELODYCRAFT_TAB);
 		this.setDefaultState(
 				this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(UPPER, false));
 	}

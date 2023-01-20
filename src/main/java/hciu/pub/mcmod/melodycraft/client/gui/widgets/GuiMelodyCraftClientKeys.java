@@ -374,7 +374,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	public void onTicking() {
 		if (notes.isEmpty()) {
-			endGame();
+			//endGame();
 			return;
 		}
 		long now = getGameTime();
