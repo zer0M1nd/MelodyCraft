@@ -5,7 +5,6 @@ import java.net.MalformedURLException;
 
 import javax.swing.JFileChooser;
 
-import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.mug.data.MalodyChartConvertor;
 import hciu.pub.mcmod.melodycraft.mug.data.SongList;
@@ -15,7 +14,6 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class CommandMelodyCraft extends CommandBase {

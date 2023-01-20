@@ -1,10 +1,8 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextField;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;

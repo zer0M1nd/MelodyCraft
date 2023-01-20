@@ -2,7 +2,6 @@ package hciu.pub.mcmod.hciusutils.gui;
 
 import hciu.pub.mcmod.hciusutils.gui.render.ButtonTextureDrawer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 
 public class SmartGuiButton extends SmartGuiComponentBase {
 

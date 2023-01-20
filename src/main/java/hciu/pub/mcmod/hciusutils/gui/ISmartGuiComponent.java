@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-
 import net.minecraft.client.Minecraft;
 
 /**

@@ -1,7 +1,5 @@
 package hciu.pub.mcmod.hciusutils.gui.render;
 
-import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
-
 abstract public class AbstractTextureDrawer<T> {
 
 	protected T obj;

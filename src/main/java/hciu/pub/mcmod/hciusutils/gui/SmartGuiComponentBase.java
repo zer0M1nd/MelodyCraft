@@ -1,16 +1,10 @@
 package hciu.pub.mcmod.hciusutils.gui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class SmartGuiComponentBase extends Gui implements ISmartGuiComponent {
 

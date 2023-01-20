@@ -9,12 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.commons.codec.digest.Md5Crypt;
-
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
-import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 
 public class Song {
@@ -125,6 +122,7 @@ public class Song {
 				if (arr.length == 1) {
 					props.put(arr[0], "undefined");
 				} else if (arr.length != 2) {
+					sc.close();
 					throw new IllegalArgumentException("Not enough or too many = signs!");
 				} else {
 					props.put(arr[0], arr[1]);

@@ -2,13 +2,10 @@ package hciu.pub.mcmod.melodycraft.client.gui.widgets;
 
 import java.io.File;
 
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.render.ScaleableTextureDrawer;
 import hciu.pub.mcmod.melodycraft.client.render.ExternalTextureManager;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.ResourceLocation;
 
 public class MelodyCraftPictureBoxDrawer extends ScaleableTextureDrawer<GuiMelodyCraftPictureBox>{
 

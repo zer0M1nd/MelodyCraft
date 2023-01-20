@@ -1,12 +1,9 @@
 package hciu.pub.mcmod.hciusutils.gui;
 
-import java.nio.channels.Selector;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.function.Function;
-
-import javax.swing.text.StyleConstants.CharacterConstants;
 
 import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
 import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;

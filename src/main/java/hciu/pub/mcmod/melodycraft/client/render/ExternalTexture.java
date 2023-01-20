@@ -1,20 +1,14 @@
 package hciu.pub.mcmod.melodycraft.client.render;
 
 import java.awt.image.BufferedImage;
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import org.apache.commons.io.IOUtils;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.data.TextureMetadataSection;
 
 public class ExternalTexture extends AbstractTexture {
 
