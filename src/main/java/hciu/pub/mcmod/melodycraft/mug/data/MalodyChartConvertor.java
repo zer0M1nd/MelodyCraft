@@ -89,6 +89,8 @@ public class MalodyChartConvertor {
 			writer.write("name=" + name + "\n");
 			writer.write("artist=" + artist + "\n");
 			writer.write("bpm=" + new DecimalFormat("#.##").format(bpm) + "\n");
+			//writer.write("debug_original=" + dir.getAbsolutePath() + "\n");
+
 			writer.close();
 			File f1 = null, f2 = null;
 			for (File f : dir.listFiles()) {
@@ -239,7 +241,8 @@ public class MalodyChartConvertor {
 				y[i] = (lasttime += (x[i] - lastbeat) * lastf);
 				lastbeat = x[i];
 				lastf = 60 / j.getDoubleValue("bpm");
-				notes.add(new Entry(lasttime * 1000, "timing," + toMili(lasttime) + "," + String.format("%.4f", (lastf))));
+				notes.add(new Entry(lasttime * 1000,
+						"timing," + toMili(lasttime) + "," + String.format("%.4f", (lastf))));
 				if (i == 0) {
 					bpm = lastf;
 				}
@@ -248,7 +251,7 @@ public class MalodyChartConvertor {
 		}
 		x[timingCount] = lastbeat + 100000;
 		y[timingCount] = lasttime + 100000 * lastf;
-		LinearInterpolation times = new LinearInterpolation(x, y);	
+		LinearInterpolation times = new LinearInterpolation(x, y);
 		// for (int i = 0; i < timingCount; i++) {
 		// System.out.println("temp " + temp[i] + " bpm " + bpms[i] + " presum " +
 		// presum[i]);
@@ -261,15 +264,17 @@ public class MalodyChartConvertor {
 						&& j.getString("sound").length() > 0) {
 					continue;
 				}
+				int lane = j.getIntValue("column");
+				if (lane < 0 || lane >= key) {
+					continue;
+				}
 				if (j.getJSONArray("endbeat") != null) {
 					double time = times.get(getBeat(j.getJSONArray("beat"))),
 							endtime = times.get(getBeat(j.getJSONArray("endbeat")));
-					int lane = j.getIntValue("column");
 					notes.add(new Entry(time, "keylong," + toMili(time) + "," + toMili(endtime) + "," + lane));
 					noteCount += 2;
 				} else {
 					double time = times.get(getBeat(j.getJSONArray("beat")));
-					int lane = j.getIntValue("column");
 					notes.add(new Entry(time, "key," + toMili(time) + "," + lane));
 					noteCount++;
 				}

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
+import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteKeyMode;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 import net.minecraft.client.resources.I18n;
 
@@ -115,7 +116,14 @@ abstract public class Chart {
 			chart.date = MiscsHelper.timeFormat(file.lastModified(), "YYYY-MM-DD hh:mm:ss");
 			chart.info = props.get("info");
 			while (sc.hasNextLine()) {
-				chart.getNotes().add(Note.readNote(sc.nextLine()));
+				Note note = Note.readNote(sc.nextLine());
+				if (note instanceof NoteKeyMode && chart instanceof ChartKeyMode) {
+					int l = ((NoteKeyMode) note).getLane();
+					if (l < 0 || l >= ((ChartKeyMode) chart).keys) {
+						continue;
+					}
+				}
+				chart.getNotes().add(note);
 			}
 			sc.close();
 			chart.id = Integer.parseInt(props.get("id"));
