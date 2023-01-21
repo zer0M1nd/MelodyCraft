@@ -86,6 +86,6 @@ public class MelodyCraftGameKeys extends MelodyCraftGame {
 	}
 	
 	public String getGameModeName() {
-		return laneState.length + "K";
+		return laneState.length + "k";
 	}
 }

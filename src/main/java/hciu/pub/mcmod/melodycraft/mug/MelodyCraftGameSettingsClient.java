@@ -12,12 +12,12 @@ public class MelodyCraftGameSettingsClient {
 	private HashMap<String, int[]> keyBinding = new HashMap<>();
 
 	public MelodyCraftGameSettingsClient() {
-		keyBinding.put("4K", new int[] { Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_L, Keyboard.KEY_SEMICOLON });
-		keyBinding.put("5K", new int[] { Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_SPACE, Keyboard.KEY_L,
+		keyBinding.put("4k", new int[] { Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_L, Keyboard.KEY_SEMICOLON });
+		keyBinding.put("5k", new int[] { Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_SPACE, Keyboard.KEY_L,
 				Keyboard.KEY_SEMICOLON });
-		keyBinding.put("6K", new int[] { Keyboard.KEY_A, Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_L,
+		keyBinding.put("6k", new int[] { Keyboard.KEY_A, Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_L,
 				Keyboard.KEY_SEMICOLON, Keyboard.KEY_APOSTROPHE });
-		keyBinding.put("7K", new int[] { Keyboard.KEY_A, Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_SPACE,
+		keyBinding.put("7k", new int[] { Keyboard.KEY_A, Keyboard.KEY_S, Keyboard.KEY_D, Keyboard.KEY_SPACE,
 				Keyboard.KEY_L, Keyboard.KEY_SEMICOLON, Keyboard.KEY_APOSTROPHE });
 	}
 
@@ -59,6 +59,10 @@ public class MelodyCraftGameSettingsClient {
 	
 	public HashMap<String, int[]> getKeyBinding() {
 		return keyBinding;
+	}
+	
+	public void setKeyBinding(HashMap<String, int[]> keyBinding) {
+		this.keyBinding = keyBinding;
 	}
 
 }

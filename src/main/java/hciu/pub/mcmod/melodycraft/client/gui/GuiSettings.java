@@ -13,9 +13,11 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
+import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;
+import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftSimpleList;
@@ -34,36 +36,50 @@ public class GuiSettings extends GuiMelodyCraftBase {
 
 	private MelodyCraftGameConfig config;
 
+	private String[] gamemodes;
+	private int[] keyCounts;
+
+	private int selectedGamemode = 0;
+	private SmartGuiButton selectedButtonModify = null;
+	private int selectedId = -1;
+
+	private void getGamemodes() {
+		gamemodes = new String[] { "4k", "5k", "6k", "7k" };
+		keyCounts = new int[] { 4, 5, 6, 7 };
+	}
+
 	public GuiSettings(SmartGuiScreen parent) {
 		super(parent);
+		getGamemodes();
 		config = MelodyCraftGameConfig.getInstance();
 
 		addComponent(new SmartGuiTextLabel(this, I18n.format("gui.settings.title")) {
 			{
 				setCentered(true);
 			}
-		}.setResizeAction(x -> x.setCenterSize(getParent().getSizeX() / 2, 20, 100, 20)));
+		}.setResizeAction(x -> x.setCenterSize(getSizeX() / 2, 20, 100, 20)));
 		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.button.save")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				MelodyCraftGameConfig.save();
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
-		}.setResizeAction(x -> x.setCenterSize(getParent().getSizeX() - 60, getParent().getSizeY() - 20, 80, 20)));
+		}.setResizeAction(x -> x.setCenterSize(getSizeX() - 60, getSizeY() - 20, 80, 20)));
 		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.button.cancel")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				MelodyCraftGameConfig.load();
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
 
-		}.setResizeAction(x -> x.setCenterSize(getParent().getSizeX() - 160, getParent().getSizeY() - 20, 80, 20)));
+		}.setResizeAction(x -> x.setCenterSize(getSizeX() - 160, getSizeY() - 20, 80, 20)));
 
 		String[] entry = new String[] { "judge", "speed", "delay", "judgedelay", "norender", "nosound" };
 		for (int i = 0; i < entry.length; i++) {
 			int y = 40 + 30 * i;
 			String name = entry[i];
 			addComponent(new SmartGuiTextLabel(this, I18n.format("gui.settings." + name))
-					.setResizeAction(x -> x.setBounds(10, y + 4, 100, 16)));
+					.setResizeAction(x -> x.setBounds(10, y + 6, 100, 20)));
 			int ii = i;
 			if (i == 0) {
 				for (int k : new int[] { -1, 1 }) {
@@ -76,13 +92,13 @@ public class GuiSettings extends GuiMelodyCraftBase {
 											EnumJudgeLevel.values().length - 1));
 									config.getGlobal().setJudge(EnumJudgeLevel.values()[j]);
 								}
-							}.setResizeAction(x -> x.setBounds(k == 1 ? 160 : 100, y, 20, 20)));
+							}.setResizeAction(x -> x.setBounds(k == 1 ? 140 : 80, y, 20, 20)));
 				}
 				addComponent(new SmartGuiTextLabel(this, () -> config.getGlobal().getJudge().name()) {
 					{
 						setCentered(true);
 					}
-				}.setResizeAction(x -> x.setCenterSize(140, y + 10, 15, 15)));
+				}.setResizeAction(x -> x.setCenterSize(120, y + 10, 15, 15)));
 
 			} else if (i <= 3) {
 
@@ -107,7 +123,7 @@ public class GuiSettings extends GuiMelodyCraftBase {
 							}
 
 						}
-					}.setResizeAction(x -> x.setBounds(100 + kk * 30 + (kk >= 2 ? 30 : 0), y, 20, 20)));
+					}.setResizeAction(x -> x.setBounds(80 + kk * 30 + (kk >= 2 ? 30 : 0), y, 20, 20)));
 				}
 				addComponent(new SmartGuiTextLabel(this) {
 					{
@@ -122,7 +138,7 @@ public class GuiSettings extends GuiMelodyCraftBase {
 							}
 						});
 					}
-				}.setResizeAction(x -> x.setCenterSize(170, y + 10, 15, 15)));
+				}.setResizeAction(x -> x.setCenterSize(150, y + 10, 15, 15)));
 
 			} else {
 				addComponent(new GuiMelodyCraftButton(this) {
@@ -147,15 +163,70 @@ public class GuiSettings extends GuiMelodyCraftBase {
 						}
 						setText(I18n.format(get() ? "gui.settings.on" : "gui.settings.off"));
 					}
-				}.setResizeAction(x -> x.setBounds(100, y, 50, 20)));
+				}.setResizeAction(x -> x.setBounds(80, y, 50, 20)));
 			}
 		}
+
+		SmartGuiComponentBase[] subs = new SmartGuiComponentBase[gamemodes.length];
+
+		for (int i = 0; i < gamemodes.length; i++) {
+			int ii = i;
+			addComponent((subs[i] = (new SmartGuiComponentBase(this) {
+				{
+					setTextureDrawer(new FramedRectangleDrawer<>(this, GuiMelodyCraftConstants.COLOR_MAIN_FRAME,
+							GuiMelodyCraftConstants.COLOR_MAIN_IN, 2));
+					int cnt = keyCounts[ii];
+					for (int j = 0; j < cnt; j++) {
+						int jj = j;
+						addComponent(new GuiMelodyCraftButton(this) {
+							public String getText() {
+								return this == selectedButtonModify ? "_"
+										: Keyboard
+												.getKeyName(config.getClient().getKeyBindingForMode(gamemodes[ii])[jj]);
+							};
+
+							@Override
+							public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+								selectedButtonModify = this;
+								selectedId = jj;
+							}
+						}.setResizeAction(x -> {
+							int sx = (getSizeX() - 20) / 2;
+							x.setBounds(5 + (jj % 2) * (sx + 10), 5 + (jj / 2) * 30, sx, 20);
+						}));
+					}
+				}
+			})));
+			subs[i].setResizeAction(x -> x.setBounds(250, 70, getSizeX() - 250 - 20, getSizeY() - 70 - 50));
+			subs[i].setVisible(i == selectedGamemode);
+		}
+
+		addComponent(new GuiMelodyCraftButton(this, () -> I18n.format("gui.settings.keybindings")
+				+ I18n.format("charttype." + gamemodes[selectedGamemode])) {
+			@Override
+			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				selectedGamemode = (selectedGamemode + 1) % gamemodes.length;
+				for (int i = 0; i < gamemodes.length; i++) {
+					subs[i].setVisible(i == selectedGamemode);
+				}
+				selectedButtonModify = null;
+			}
+		}.setResizeAction(x -> x.setBounds(250, 40, getSizeX() - 250 - 20, 20)));
 	}
 
 	@Override
 	public void onResizeSelf() {
 		super.onResizeSelf();
 		// text.setCenterSize(getSizeX() / 2, 16, 100, 16);
+	}
+
+	@Override
+	public void onKeyPressed(char typedChar, int keyCode) {
+		super.onKeyPressed(typedChar, keyCode);
+		if (selectedButtonModify != null) {
+			selectedButtonModify = null;
+			config.getClient().getKeyBindingForMode(gamemodes[selectedGamemode])[selectedId] = keyCode;
+		}
 	}
 
 }

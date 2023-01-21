@@ -1,5 +1,7 @@
 package hciu.pub.mcmod.melodycraft.client.gui.widgets;
 
+import com.google.common.base.Supplier;
+
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
 import hciu.pub.mcmod.hciusutils.gui.render.ButtonTextureDrawer;
@@ -9,17 +11,20 @@ public class GuiMelodyCraftButton extends SmartGuiButton {
 
 	public GuiMelodyCraftButton(ISmartGuiComponent holder) {
 		super(holder);
-		setTextureDrawer(new ButtonTextureDrawer(this,
-				ButtonTextureDrawer.makeRectangleSubs(this, 3,
-						new int[] { GuiMelodyCraftConstants.COLOR_BUTTON_FRAME_DISABLED, GuiMelodyCraftConstants.COLOR_BUTTON_FRAME,
-								GuiMelodyCraftConstants.COLOR_BUTTON_FRAME },
-						new int[] { GuiMelodyCraftConstants.COLOR_BUTTON_INNER, GuiMelodyCraftConstants.COLOR_BUTTON_INNER,
-								GuiMelodyCraftConstants.COLOR_BUTTON_INNER_SELECTED },
-						1)));
+		setTextureDrawer(new ButtonTextureDrawer(this, ButtonTextureDrawer.makeRectangleSubs(this, 3,
+				new int[] { GuiMelodyCraftConstants.COLOR_BUTTON_FRAME_DISABLED,
+						GuiMelodyCraftConstants.COLOR_BUTTON_FRAME, GuiMelodyCraftConstants.COLOR_BUTTON_FRAME },
+				new int[] { GuiMelodyCraftConstants.COLOR_BUTTON_INNER, GuiMelodyCraftConstants.COLOR_BUTTON_INNER,
+						GuiMelodyCraftConstants.COLOR_BUTTON_INNER_SELECTED },
+				1)));
 	}
-	
 
 	public GuiMelodyCraftButton(ISmartGuiComponent holder, String s) {
+		this(holder);
+		setText(s);
+	}
+
+	public GuiMelodyCraftButton(ISmartGuiComponent holder, Supplier<String> s) {
 		this(holder);
 		setText(s);
 	}

@@ -56,8 +56,11 @@ gui.settings.judge=判定难度
 gui.settings.speed=谱面流速
 gui.settings.delay=音频延迟
 gui.settings.judgedelay=判定延迟
-gui.settings.norender=游戏中取消世界渲染
-gui.settings.nosound=游戏中取消外部声音
+gui.settings.norender=取消世界渲染
+gui.settings.nosound=取消外部声音
 
 gui.settings.on=开
 gui.settings.off=关
+
+
+gui.settings.keybindings=按键绑定：

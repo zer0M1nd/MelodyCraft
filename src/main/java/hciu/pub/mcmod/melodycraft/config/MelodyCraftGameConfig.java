@@ -84,4 +84,12 @@ public class MelodyCraftGameConfig {
 	public MelodyCraftGameSettingsClient getClient() {
 		return client;
 	}
+	
+	public void setGlobal(MelodyCraftGameSettings global) {
+		this.global = global;
+	}
+	
+	public void setClient(MelodyCraftGameSettingsClient client) {
+		this.client = client;
+	}
 }

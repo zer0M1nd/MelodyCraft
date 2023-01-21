@@ -1,5 +1,7 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
+import java.io.IOException;
+
 import org.lwjgl.input.Keyboard;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
@@ -12,6 +14,7 @@ import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import scala.swing.event.KeyPressed;
 
 public class GuiGame extends GuiMelodyCraftBase {
 
@@ -40,10 +43,10 @@ public class GuiGame extends GuiMelodyCraftBase {
 		addComponent(pause = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				if(gameClient.getGame().getState() == EnumGameState.PAUSED) {
+				if (gameClient.getGame().getState() == EnumGameState.PAUSED) {
 					screenPause.setVisible(false);
 					gameClient.resume();
-				}else {
+				} else {
 					screenPause.setVisible(true);
 					gameClient.pause();
 				}
@@ -53,11 +56,11 @@ public class GuiGame extends GuiMelodyCraftBase {
 		pause.setText(I18n.format("gui.button.pause"));
 		pause.setVisible(true);
 
-		addKeyBinding(Keyboard.KEY_F1, pause, false);
-		addKeyBinding(Keyboard.KEY_F2, screenPause.getButtonRestart(), false);
-		addKeyBinding(Keyboard.KEY_F3, screenPause.getButtonQuit(), false);
+		addKeyBinding(Keyboard.KEY_1, pause, false);
+		addKeyBinding(Keyboard.KEY_2, screenPause.getButtonRestart(), false);
+		addKeyBinding(Keyboard.KEY_3, screenPause.getButtonQuit(), false);
 
-		if(clientSettings.isNoSound()) {
+		if (clientSettings.isNoSound()) {
 			Minecraft.getMinecraft().getSoundHandler().pauseSounds();
 		}
 
@@ -77,7 +80,6 @@ public class GuiGame extends GuiMelodyCraftBase {
 		setFocus(gameClient);
 	}
 
-
 	public TileEntityArcade getTileEntity() {
 		return tileEntity;
 	}
@@ -88,9 +90,18 @@ public class GuiGame extends GuiMelodyCraftBase {
 
 	@Override
 	public void onGuiClosed() {
-		if(clientSettings.isNoSound()) {
+		if (clientSettings.isNoSound()) {
 			Minecraft.getMinecraft().getSoundHandler().resumeSounds();
 		}
 		super.onGuiClosed();
+	}
+
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		// TODO Auto-generated method stub
+		if (keyCode == 1) {
+			keyCode = Keyboard.KEY_1;
+		}
+		super.keyTyped(typedChar, keyCode);
 	}
 }
