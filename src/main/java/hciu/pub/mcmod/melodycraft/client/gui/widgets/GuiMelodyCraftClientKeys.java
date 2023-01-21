@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
+import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiConstants;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
+import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.melodycraft.client.gui.GuiMelodyCraftConstants;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.mug.EnumGameState;
@@ -24,6 +26,7 @@ import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteKeyMode;
 import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteKeyModeLong;
 import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteTiming;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
@@ -38,7 +41,9 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	private long tempInfoRemaining = 0;
 
 	private GuiMelodyCraftPictureBox pictureBg;
-	
+	private SmartGuiTextLabel labelInfo;
+	private SmartGuiTextLabel labelChartInfo;
+
 	private int[] keyBindings;
 
 	public GuiMelodyCraftClientKeys(ISmartGuiComponent holder, MelodyCraftGameKeys game,
@@ -50,12 +55,15 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		startGame();
 
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
+		addComponent(
+				labelInfo = new SmartGuiTextLabel(this, game.getSong().getName() + " - " + game.getSong().getArtist()));
+		addComponent(labelChartInfo = new SmartGuiTextLabel(this, game.getChart().getInfo()));
 		if (game.getSong().getBgfile() == null) {
 			pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
 		} else {
 			pictureBg.setTexture(game.getSong().getBgfile(), 0, 0, 256, 256);
 		}
-		
+
 		keyBindings = clientSettings.getKeyBindingForMode(this.getGame().getGameModeName());
 
 	}
@@ -130,7 +138,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		try {
 			onTicking();
 			drawLanes();
-			drawScoreAndAcc();
+			drawScoreAccProgress();
 			drawNotes();
 			drawJudgeInfo();
 			drawComboAndCurrentJudge();
@@ -166,16 +174,27 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		}
 	}
 
-	public void drawScoreAndAcc() {
+	public void drawScoreAccProgress() {
+		int px = getActualX() + ratioX(0.35) + 2 + 8 * 7, py = getActualY() + 5;
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.getTextureManager().bindTexture(GuiMelodyCraftConstants.MUSIC_GAME);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		GuiMelodyCraftConstants.CHARSET_MEDIUM_NUMBER.draw(Integer.toString(getGame().getScore()),
-				getActualX() + ratioX(0.35) + 2 + 8 * 7, getActualY() + 5, true);
+		GuiMelodyCraftConstants.CHARSET_MEDIUM_NUMBER.draw(Integer.toString(getGame().getScore()), px, py, true);
 		double x = getGame().getAcc();
 		GuiMelodyCraftConstants.CHARSET_SMALL_NUMBER.draw(
-				(int) (x * 100) + "." + String.format("%02d", ((int) (x * 10000) % 100)) + "%",
-				getActualX() + ratioX(0.35) + 2 + 8 * 7, getActualY() + 17, true);
+				(int) (x * 100) + "." + String.format("%02d", ((int) (x * 10000) % 100)) + "%", px, py + 12, true);
+
+		double ratio = 1.0;
+		if (notes.size() > 0) {
+			long maxt = notes.getLast().getNote().getEndtime();
+			if (maxt != 0) {
+				ratio = Math.max(0.0, Math.min(1.0, (double) getGameTime() / maxt));
+			}
+		}
+		Gui.drawRect(px - 56, py + 24, px, py + 28, GuiMelodyCraftConstants.COLOR_BUTTON_FRAME);
+		Gui.drawRect(px - 56 + 1, py + 24 + 1, px - 1, py + 28 - 1, GuiMelodyCraftConstants.COLOR_BUTTON_INNER);
+		Gui.drawRect(px - 56 + 1, py + 24 + 1, px - 1 - (int) ((56 - 2) * (1 - ratio)), py + 28 - 1,
+				GuiMelodyCraftConstants.getColorByRGB(182, 242, 255));
 	}
 
 	public void drawNotes() {
@@ -370,7 +389,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	public void onTicking() {
 		if (notes.isEmpty()) {
-			//endGame();
+			// endGame();
 			return;
 		}
 		long now = getGameTime();
@@ -498,7 +517,9 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	@Override
 	public void onResizeSelf() {
-		int bgsz = Math.min(ratioX(0.5) - 40, getSizeY() - 45);
-		pictureBg.setBounds(30 + ratioX(0.5), 35, bgsz, bgsz);
+		int bgsz = Math.min(ratioX(0.5) - 50, getSizeY() - 45);
+		pictureBg.setBounds(30 + ratioX(0.5), 45, bgsz, bgsz);
+		labelInfo.setBounds(30 + ratioX(0.5), 7, bgsz, 20);
+		labelChartInfo.setBounds(30 + ratioX(0.5), 21, bgsz, 20);
 	}
 }
