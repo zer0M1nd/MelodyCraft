@@ -20,7 +20,7 @@ public class GuiMain extends GuiMelodyCraftBase {
 		addComponent(buttonSingleplayer = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				Minecraft.getMinecraft().displayGuiScreen(new GuiSelectSong(getSupreme(),GuiMain.this.tileEntity));
+				Minecraft.getMinecraft().displayGuiScreen(new GuiSelectSong(getSupreme(), GuiMain.this.tileEntity));
 			}
 		});
 		buttonSingleplayer.setText(I18n.format("gui.singleplayer"));

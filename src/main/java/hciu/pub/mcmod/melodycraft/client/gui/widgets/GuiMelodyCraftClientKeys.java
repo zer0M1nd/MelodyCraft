@@ -30,6 +30,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
+import net.minecraft.client.resources.I18n;
 
 public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
@@ -40,9 +41,13 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	private long tempInfoStarted = 0;
 	private long tempInfoRemaining = 0;
 
+	private long lastNote = 0;
+
 	private GuiMelodyCraftPictureBox pictureBg;
 	private SmartGuiTextLabel labelInfo;
 	private SmartGuiTextLabel labelChartInfo;
+
+	private GuiMelodyCraftButton buttonNext;
 
 	private int[] keyBindings;
 
@@ -64,7 +69,14 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			pictureBg.setTexture(game.getSong().getBgfile(), 0, 0, 256, 256);
 		}
 
+		addComponent(buttonNext = new GuiMelodyCraftButton(this, I18n.format("gui.button.finish")) {
+			@Override
+			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+
+			}
+		});
 		keyBindings = clientSettings.getKeyBindingForMode(this.getGame().getGameModeName());
+		buttonNext.setVisible(false);
 
 	}
 
@@ -109,6 +121,12 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		}
 		byEndTime.sort((a, b) -> (int) (a.getNote().getTime() - b.getNote().getTime()));
 		notes = new LinkedList<>(byEndTime);
+
+		if (notes.size() > 0) {
+			lastNote = notes.getLast().getNote().getEndtime();
+		} else {
+			lastNote = 0;
+		}
 	}
 
 	private long getGameTime() {
@@ -143,6 +161,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			drawJudgeInfo();
 			drawComboAndCurrentJudge();
 			drawTempInfo();
+			drawFullCombo();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -185,12 +204,11 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 				(int) (x * 100) + "." + String.format("%02d", ((int) (x * 10000) % 100)) + "%", px, py + 12, true);
 
 		double ratio = 1.0;
-		if (notes.size() > 0) {
-			long maxt = notes.getLast().getNote().getEndtime();
-			if (maxt != 0) {
-				ratio = Math.max(0.0, Math.min(1.0, (double) getGameTime() / maxt));
-			}
+		long maxt = lastNote;
+		if (maxt != 0) {
+			ratio = Math.max(0.0, Math.min(1.0, (double) getGameTime() / maxt));
 		}
+
 		Gui.drawRect(px - 56, py + 24, px, py + 28, GuiMelodyCraftConstants.COLOR_BUTTON_FRAME);
 		Gui.drawRect(px - 56 + 1, py + 24 + 1, px - 1, py + 28 - 1, GuiMelodyCraftConstants.COLOR_BUTTON_INNER);
 		Gui.drawRect(px - 56 + 1, py + 24 + 1, px - 1 - (int) ((56 - 2) * (1 - ratio)), py + 28 - 1,
@@ -290,11 +308,11 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		mc.getTextureManager().bindTexture(GuiMelodyCraftConstants.MUSIC_GAME);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		float mid = (float) (ratioX(0.35) - 16 * getGame().getKeys() - 6 + (16 * getGame().getKeys() + 3) / 2.0);
-		float upper = ratioY(0.50) - 30;
+		float upper = ratioY(0.30) - 30;
 		String combo = Integer.toString(getGame().getCombo());
 		GuiMelodyCraftConstants.CHARSET_LARGE_NUMBER.draw(combo, getActualX() + mid - combo.length() * 9,
 				getActualY() + upper, false);
-		upper += 30;
+		upper += 25;
 		if (getGameTime() - getGame().getLastJudgeTime() < 2000) {
 			double t = (1000 - (getGameTime() - getGame().getLastJudgeTime())) / 1000.0;
 			float alpha = (float) Math.max(0.5, t);
@@ -311,6 +329,27 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			float sx = 107 * size, sy = 18 * size;
 			SmartGuiScreen.drawScaledTexturedModelRect(midx - sx / 2, midy - sy / 2, sx, sy, 0F,
 					51 + 18 * getGame().getLastJudge().ordinal(), 107, 18);
+			GlStateManager.disableBlend();
+		}
+	}
+
+	public void drawFullCombo() {
+		Minecraft mc = Minecraft.getMinecraft();
+		mc.getTextureManager().bindTexture(GuiMelodyCraftConstants.MUSIC_GAME);
+
+		double t = (getGameTime() - lastNote - 500) / 4000.0;
+		if (t >= 0 && t <= 1 && getGame().getJudge()[3] == 0) {
+			float mid = (float) (ratioX(0.35) - 16 * getGame().getKeys() - 6 + (16 * getGame().getKeys() + 3) / 2.0);
+			float midx = getActualX() + mid, midy = getActualY() + ratioY(0.30) + 40 + 9;
+
+			float size = (float) Math.max(1.0, (1 - t) * 4.5 - 2.5);
+			float alpha = (float) Math.min(1.0, (1 - t) * 2);
+
+			GlStateManager.enableBlend();
+			GlStateManager.color(1.0F, 1.0F, 1.0F, alpha);
+			GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
+			float sx = 156 * size, sy = 18 * size;
+			SmartGuiScreen.drawScaledTexturedModelRect(midx - sx / 2, midy - sy / 2, sx, sy, 0F, 147, 156, 18);
 			GlStateManager.disableBlend();
 		}
 	}
@@ -388,11 +427,14 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	}
 
 	public void onTicking() {
+		long now = getGameTime();
+		if (now > lastNote + 1000) {
+			buttonNext.setVisible(true);
+		}
 		if (notes.isEmpty()) {
 			// endGame();
 			return;
 		}
-		long now = getGameTime();
 		if (now > -clientSettings.getDelay() + getGame().getChart().getDelay() && currentlyPlaying == null) {
 			// System.out.println(getGame().getChart().getDelay());
 			currentlyPlaying = ExternalSoundHandler.getInstance().playSound(getGame().getSong());
@@ -521,5 +563,6 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		pictureBg.setBounds(30 + ratioX(0.5), 45, bgsz, bgsz);
 		labelInfo.setBounds(30 + ratioX(0.5), 7, bgsz, 20);
 		labelChartInfo.setBounds(30 + ratioX(0.5), 21, bgsz, 20);
+		buttonNext.setCenterSize(ratioX(0.5), ratioY(0.75), 50, 20);
 	}
 }
