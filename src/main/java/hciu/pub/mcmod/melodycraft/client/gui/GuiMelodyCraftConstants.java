@@ -40,4 +40,40 @@ public class GuiMelodyCraftConstants {
 		return (a << 24) | (r << 16) | (g << 8) | b;
 	}
 
+	/**
+	 * 
+	 * @param h 0 ~ 360
+	 * @param s 0 ~ 100
+	 * @param v 0 ~ 100
+	 * @return
+	 */
+	public static int getColorByHSV(int h, int s, int v) {
+		int[] rgb = HSVtoRGB(new float[] { (float) (h / 360.0), (float) (s / 100.0), (float) (v / 100.0) });
+		return getColorByRGB(rgb[0], rgb[1], rgb[2]);
+	}
+
+	public static int[] HSVtoRGB(float[] hsv) {
+		int h = (int) (hsv[0] * 6);
+		float f = hsv[0] * 6 - h;
+		float p = hsv[2] * (1 - hsv[1]);
+		float q = hsv[2] * (1 - f * hsv[1]);
+		float t = hsv[2] * (1 - (1 - f) * hsv[1]);
+		switch (h) {
+		case 0:
+			return new int[] { (int) (hsv[2] * 255), (int) (t * 255), (int) (p * 255) };
+		case 1:
+			return new int[] { (int) (q * 255), (int) (hsv[2] * 255), (int) (p * 255) };
+		case 2:
+			return new int[] { (int) (p * 255), (int) (hsv[2] * 255), (int) (t * 255) };
+		case 3:
+			return new int[] { (int) (p * 255), (int) (q * 255), (int) (hsv[2] * 255) };
+		case 4:
+			return new int[] { (int) (t * 255), (int) (p * 255), (int) (hsv[2] * 255) };
+		case 5:
+			return new int[] { (int) (hsv[2] * 255), (int) (p * 255), (int) (q * 255) };
+		default:
+			return new int[] { 0, 0, 0 };
+		}
+	}
+
 }

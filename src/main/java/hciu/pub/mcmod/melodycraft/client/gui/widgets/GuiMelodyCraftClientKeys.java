@@ -9,7 +9,9 @@ import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiConstants;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
+import hciu.pub.mcmod.melodycraft.client.gui.GuiGame;
 import hciu.pub.mcmod.melodycraft.client.gui.GuiMelodyCraftConstants;
+import hciu.pub.mcmod.melodycraft.client.gui.GuiResult;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.mug.EnumGameState;
 import hciu.pub.mcmod.melodycraft.mug.EnumJudge;
@@ -45,7 +47,6 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	private GuiMelodyCraftPictureBox pictureBg;
 	private SmartGuiTextLabel labelInfo;
-	private SmartGuiTextLabel labelChartInfo;
 
 	private GuiMelodyCraftButton buttonNext;
 
@@ -60,9 +61,8 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		startGame();
 
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
-		addComponent(
-				labelInfo = new SmartGuiTextLabel(this, game.getSong().getName() + " - " + game.getSong().getArtist()));
-		addComponent(labelChartInfo = new SmartGuiTextLabel(this, game.getChart().getInfo()));
+		addComponent(labelInfo = new SmartGuiTextLabel(this, game.getSong().getName() + "\n"
+				+ game.getSong().getArtist() + "\n" + game.getChart().getInfoDifficulty()));
 		if (game.getSong().getBgfile() == null) {
 			pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
 		} else {
@@ -72,7 +72,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		addComponent(buttonNext = new GuiMelodyCraftButton(this, I18n.format("gui.button.finish")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-
+				Minecraft.getMinecraft().displayGuiScreen(new GuiResult((GuiGame) getSupreme(), game));
 			}
 		});
 		keyBindings = clientSettings.getKeyBindingForMode(this.getGame().getGameModeName());
@@ -480,6 +480,10 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	@Override
 	public void onKeyPressed(char typedChar, int keyCode) {
+		if (keyCode == Keyboard.KEY_RETURN && buttonNext.isVisible()) {
+			buttonNext.onMouseClicked(0, 0, 0);
+			return;
+		}
 		if (game.getState() == EnumGameState.PAUSED) {
 			return;
 		}
@@ -562,7 +566,6 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 		int bgsz = Math.min(ratioX(0.5) - 50, getSizeY() - 45);
 		pictureBg.setBounds(30 + ratioX(0.5), 45, bgsz, bgsz);
 		labelInfo.setBounds(30 + ratioX(0.5), 7, bgsz, 20);
-		labelChartInfo.setBounds(30 + ratioX(0.5), 21, bgsz, 20);
 		buttonNext.setCenterSize(ratioX(0.5), ratioY(0.75), 50, 20);
 	}
 }

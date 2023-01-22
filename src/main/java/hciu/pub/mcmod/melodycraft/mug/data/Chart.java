@@ -50,6 +50,10 @@ abstract public class Chart {
 		return info;
 	}
 
+	public String getInfoDifficulty() {
+		return info + " Lv." + getDifficulty();
+	}
+
 	public List<Note> getNotes() {
 		return notes;
 	}

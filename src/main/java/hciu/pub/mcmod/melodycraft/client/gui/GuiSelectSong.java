@@ -1,5 +1,6 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -155,6 +156,17 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 
 	public Song getSelected() {
 		return listSong.getSelectedItem();
+	}
+
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		super.keyTyped(typedChar, keyCode);
+		int[] keys = new int[] { Keyboard.KEY_LEFT, Keyboard.KEY_UP, Keyboard.KEY_DOWN, Keyboard.KEY_RIGHT };
+		for (int i = 0; i < keys.length; i++) {
+			if (keyCode == keys[i]) {
+				listSong.pressButton(i);
+			}
+		}
 	}
 
 }

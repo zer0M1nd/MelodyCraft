@@ -1,5 +1,7 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
+import java.io.IOException;
+
 import org.lwjgl.input.Keyboard;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
@@ -72,7 +74,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		listChart.setButtonTexts(new String[] { I18n.format("gui.list.top"), I18n.format("gui.list.up"),
 				I18n.format("gui.list.down"), I18n.format("gui.list.bottom") });
 		listChart.setItems(song.getCharts());
-		listChart.setDisplayFunction(e -> e.getInfo() + " Lv." + e.getDifficulty());
+		listChart.setDisplayFunction(e -> e.getInfoDifficulty());
 		if (song.getBgfile() == null) {
 			pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
 		} else {
@@ -115,4 +117,14 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		labelInfo.setBounds(ratioX(0.5) + 110, 52, ratioX(0.5) - 125, 100);
 	}
 
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		super.keyTyped(typedChar, keyCode);
+		int[] keys = new int[] { Keyboard.KEY_LEFT, Keyboard.KEY_UP, Keyboard.KEY_DOWN, Keyboard.KEY_RIGHT };
+		for (int i = 0; i < keys.length; i++) {
+			if (keyCode == keys[i]) {
+				listChart.pressButton(i);
+			}
+		}
+	}
 }

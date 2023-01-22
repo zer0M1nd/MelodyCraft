@@ -63,3 +63,23 @@ gui.settings.on=开
 gui.settings.off=关
 
 gui.settings.keybindings=按键绑定：
+
+gui.result.title=游戏结果
+gui.result.button.retry=重试
+gui.result.button.next=继续
+
+gui.result.score=分数
+gui.result.acc=Accuracy
+
+gui.judge.perfect=Perfect
+gui.judge.great=Great
+gui.judge.good=Good
+gui.judge.miss=Miss
+
+gui.result.ap=All Perfect!
+gui.result.fc=Full Combo!
+
+gui.result.maxcombo=Max Combo
+
+gui.result.newrecord=新纪录！
+gui.result.record=最高纪录
