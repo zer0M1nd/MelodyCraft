@@ -5,12 +5,14 @@ import hciu.pub.mcmod.melodycraft.command.CommandMelodyCraft;
 import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import hciu.pub.mcmod.melodycraft.item.ItemList;
 import hciu.pub.mcmod.melodycraft.mug.data.SongList;
+import hciu.pub.mcmod.melodycraft.mug.saves.ResultManager;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -34,5 +36,11 @@ public class CommonProxy {
 		if (!MelodyCraftMod.isClient()) {
 			e.registerServerCommand(new CommandMelodyCraft());
 		}
+		ResultManager.getInstance().load();
+	}
+
+	public void onStop(FMLServerStoppingEvent e) {
+		ResultManager.getInstance().save();
+		
 	}
 }

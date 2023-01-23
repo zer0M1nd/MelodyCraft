@@ -48,14 +48,20 @@ public class GuiResult extends GuiMelodyCraftBase {
 
 		addComponent(new SmartGuiTextLabel(this, I18n.format("gui.result.title")).setCentered(true)
 				.setResizeAction(x -> x.setCenterSize(ratioX(0.5), 12, 100, 16)));
-
+		
+		PlayResult res = ResultManager.getInstance().getBestFor(game.getChart());
+		int history = res == null ? 0 : res.getScore();
+		
 		addComponent(new SmartGuiTextLabel(this) {
 			{
 				String s = "";
 				s += game.getSong().getName() + "\n";
 				s += game.getSong().getArtist() + "\n";
 				s += game.getChart().getInfoDifficulty() + "\n\n";
+				s += I18n.format("gui.result.maxcombo") + "\n";
 				s += I18n.format("gui.result.score") + "\n";
+				s += (game.getScore() > history ? I18n.format("gui.result.newrecord") : I18n.format("gui.result.record")) + "\n";
+				s += "\n";
 				s += I18n.format("gui.result.acc") + "\n";
 				s += "\n\n\n\n";
 				s += I18n.format("gui.judge.perfect") + "\n";
@@ -68,7 +74,10 @@ public class GuiResult extends GuiMelodyCraftBase {
 		addComponent(new SmartGuiTextLabel(this) {
 			{
 				String s = "\n\n\n\n";
+				s += game.getMaxCombo() + "\n";
 				s += game.getScore() + "\n";
+				s += history + "\n";
+				s += "\n";
 				s += ((int) (game.getAcc() * 100) + "." + String.format("%02d", ((int) (game.getAcc() * 10000) % 100))
 						+ "%") + "\n";
 				s += "\n\n\n\n";
@@ -99,21 +108,22 @@ public class GuiResult extends GuiMelodyCraftBase {
 				Minecraft mc = Minecraft.getMinecraft();
 				mc.fontRenderer.drawSplitString(text, actualX, actualY, sizeX, color);
 			}
-		}.setResizeAction(x -> x.setBounds(ratioX(0.5) + 10, 35 + 9 * 8, ratioX(0.5) - 10, getSizeY() - 45)));
+		}.setResizeAction(x -> x.setBounds(ratioX(0.5) + 10, 35 + 9 * 10, ratioX(0.5) - 10, getSizeY() - 45)));
 
 		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.result.button.next")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				saveResult();
 				SmartGuiScreen screen = null;
 				try {
-					screen = parent.getParent().getParent();
+					screen = parent.getParent();
 				} catch (Exception e) {
 				}
-				if (screen instanceof GuiSelectSong) {
+				if (screen instanceof GuiSelectChart) {
+					((GuiSelectChart) screen).updateText();
 					Minecraft.getMinecraft().displayGuiScreen(screen);
 				} else {
-					Minecraft.getMinecraft().displayGuiScreen(
-							new GuiSelectSong(new GuiMain(null, game.getTileEntity()), game.getTileEntity()));
+					Minecraft.getMinecraft().displayGuiScreen(null);
 				}
 
 			}
@@ -121,6 +131,7 @@ public class GuiResult extends GuiMelodyCraftBase {
 		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.result.button.retry")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				saveResult();
 				game.getTileEntity().setGame(game.newGame());
 				Minecraft.getMinecraft().displayGuiScreen(
 						new GuiGame(parent.getParent(), game.getTileEntity(), parent.getClientSettings()));

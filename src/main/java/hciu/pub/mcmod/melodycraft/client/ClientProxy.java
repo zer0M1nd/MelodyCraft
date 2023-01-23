@@ -6,12 +6,16 @@ import hciu.pub.mcmod.melodycraft.client.sound.EventSound;
 import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.command.CommandMelodyCraft;
 import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
+import hciu.pub.mcmod.melodycraft.mug.saves.ResultManager;
+import hciu.pub.mcmod.melodycraft.utils.ReflectionHelper;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 public class ClientProxy extends CommonProxy {
 
@@ -43,6 +47,11 @@ public class ClientProxy extends CommonProxy {
 	public void onStart(FMLServerStartingEvent e) {
 		super.onStart(e);
 		ClientCommandHandler.instance.registerCommand(new CommandMelodyCraft());
+
+	}
+
+	public void onStop(FMLServerStoppingEvent e) {
+		super.onStop(e);
 	}
 
 	public void registerClientEvents() {

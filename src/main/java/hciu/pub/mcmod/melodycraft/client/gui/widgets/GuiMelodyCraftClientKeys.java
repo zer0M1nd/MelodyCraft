@@ -480,9 +480,11 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 	@Override
 	public void onKeyPressed(char typedChar, int keyCode) {
-		if (keyCode == Keyboard.KEY_RETURN && buttonNext.isVisible()) {
-			buttonNext.onMouseClicked(0, 0, 0);
-			return;
+		if (keyCode == Keyboard.KEY_RETURN) {
+			if (buttonNext.isVisible()) {
+				buttonNext.onMouseClicked(0, 0, 0);
+				return;
+			}
 		}
 		if (game.getState() == EnumGameState.PAUSED) {
 			return;

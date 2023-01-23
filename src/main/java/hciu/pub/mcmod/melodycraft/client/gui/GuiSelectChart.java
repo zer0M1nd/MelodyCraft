@@ -15,6 +15,8 @@ import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettings;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
+import hciu.pub.mcmod.melodycraft.mug.saves.PlayResult;
+import hciu.pub.mcmod.melodycraft.mug.saves.ResultManager;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
 import net.minecraft.client.Minecraft;
@@ -36,20 +38,12 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		super(parent);
 		this.song = song;
 		this.tileEntity = tileEntity;
-		addComponent(buttonNext = new GuiMelodyCraftButton(this) {
-			@Override
-			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
-				startGame(song, (ChartKeyMode) listChart.getSelectedItem(),
-						MelodyCraftGameConfig.getInstance().getGlobal());
-			}
-		});
 		addComponent(buttonBack = new GuiMelodyCraftButton(this) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
 		});
-		buttonNext.setText(I18n.format("gui.startgame"));
 		buttonBack.setText(I18n.format("gui.back"));
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
 		addComponent(labelInfo = new SmartGuiTextLabel(this));
@@ -57,18 +51,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		addComponent(listChart = new GuiMelodyCraftSimpleList<Chart>(this) {
 			@Override
 			public void onSelectionChanged() {
-				Chart x = getSelectedItem();
-				if (x == null) {
-					labelInfo.setText("");
-				} else {
-					String t = x.getInfo();
-					t = t + "\n" + I18n.format("gui.author", x.getAuthor());
-					t = t + "\n" + I18n.format("gui.mode", x.getModeName());
-					t = t + "\n" + I18n.format("gui.difficulty", Integer.toString(x.getDifficulty()));
-					t = t + "\n" + I18n.format("gui.date", x.getDate());
-					labelInfo.setText(t);
-				}
-
+				updateText();
 			}
 		});
 		listChart.setButtonTexts(new String[] { I18n.format("gui.list.top"), I18n.format("gui.list.up"),
@@ -88,6 +71,14 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		});
 		buttonSettings.setText(I18n.format("gui.settings"));
 
+		addComponent(buttonNext = new GuiMelodyCraftButton(this) {
+			@Override
+			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
+				startGame(song, (ChartKeyMode) listChart.getSelectedItem(),
+						MelodyCraftGameConfig.getInstance().getGlobal());
+			}
+		});
+		buttonNext.setText(I18n.format("gui.startgame"));
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
 
@@ -114,7 +105,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		buttonSettings.setBounds(77, 7, 50, 20);
 		int bgsz = Math.min(getSizeX() / 2 - 40, getSizeY() - 45);
 		pictureBg.setBounds(30, 35, bgsz, bgsz);
-		labelInfo.setBounds(ratioX(0.5) + 110, 52, ratioX(0.5) - 125, 100);
+		labelInfo.setBounds(ratioX(0.5) + 110, 27, ratioX(0.5) - 125, ratioY(1.0) - 32);
 	}
 
 	@Override
@@ -125,6 +116,34 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 			if (keyCode == keys[i]) {
 				listChart.pressButton(i);
 			}
+		}
+	}
+
+	public void updateText() {
+		Chart x = listChart.getSelectedItem();
+		if (x == null) {
+			labelInfo.setText("");
+		} else {
+			String t = x.getInfo();
+			t = t + "\n" + I18n.format("gui.author", x.getAuthor());
+			t = t + "\n" + I18n.format("gui.mode", x.getModeName());
+			t = t + "\n" + I18n.format("gui.difficulty", Integer.toString(x.getDifficulty()));
+			t = t + "\n" + I18n.format("gui.date", x.getDate());
+
+			t = t + "\n\n";
+
+			PlayResult res = ResultManager.getInstance().getBestFor(x);
+
+			if (res == null) {
+				t = t + "\n" + I18n.format("gui.neverplayed");
+			} else {
+				t = t + "\n" + I18n.format("gui.bestscore");
+				t = t + "\n" + res.getScore();
+				t = t + "\n" + res.getJudgeLevel().name() + "  " + res.accStr() + "  "
+						+ (res.checkAP() ? "AP" : (res.checkFC() ? "FC" : ""));
+			}
+
+			labelInfo.setText(t);
 		}
 	}
 }

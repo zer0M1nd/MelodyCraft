@@ -25,6 +25,9 @@ gui.artist=曲师: %s
 gui.bpm=BPM: %s
 gui.date=添加日期: %s
 
+gui.neverplayed=你从未玩过这张谱面
+gui.bestscore=最好成绩：
+
 gui.author=谱师：%s
 gui.mode=模式：%s
 gui.difficulty=难度：%s
@@ -68,8 +71,9 @@ gui.result.title=游戏结果
 gui.result.button.retry=重试
 gui.result.button.next=继续
 
+
 gui.result.score=分数
-gui.result.acc=Accuracy
+gui.result.acc=ACC
 
 gui.judge.perfect=Perfect
 gui.judge.great=Great
@@ -82,4 +86,4 @@ gui.result.fc=Full Combo!
 gui.result.maxcombo=Max Combo
 
 gui.result.newrecord=新纪录！
-gui.result.record=最高纪录
+gui.result.record=历史记录

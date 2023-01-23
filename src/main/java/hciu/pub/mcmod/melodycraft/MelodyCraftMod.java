@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 
 @Mod(modid = MelodyCraftMod.MODID, name = MelodyCraftMod.NAME, version = MelodyCraftMod.VERSION)
 public class MelodyCraftMod {
@@ -53,6 +54,12 @@ public class MelodyCraftMod {
 	public void onStart(FMLServerStartingEvent e) {
 		mcServer = e.getServer();
 		proxy.onStart(e);
+	}
+
+	@EventHandler
+	public void onStop(FMLServerStoppingEvent e) {
+		//System.out.println("stopping");
+		proxy.onStop(e);
 	}
 
 	public static boolean isClient() {

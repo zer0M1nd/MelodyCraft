@@ -126,14 +126,14 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 	public void onResizeSelf() {
 		super.onResizeSelf();
 		buttonBack.setBounds(7, 7, 50, 20);
+		buttonSettings.setBounds(77, 7, 50, 20);
+		buttonPreview.setBounds(147, 7, 50, 20);
 		textSearch.setBounds(ratioX(0.5), 7, 100, 15);
-		labelInfo.setBounds(ratioX(0.5) + 110, 52, ratioX(0.5) - 125, 100);
+		labelInfo.setBounds(ratioX(0.5) + 110, 27, ratioX(0.5) - 125, 100);
 		buttonNext.setBounds(getSizeX() - 57, getSizeY() - 27, 50, 20);
-		buttonPreview.setBounds(ratioX(0.5) + 110, 27, 50, 20);
 		listSong.setBounds(ratioX(0.5), 27, 100, getSizeY() - 34);
 		int bgsz = Math.min(getSizeX() / 2 - 40, getSizeY() - 45);
 		pictureBg.setBounds(30, 35, bgsz, bgsz);
-		buttonSettings.setBounds(77, 7, 50, 20);
 	}
 
 	public <T> List<T> filter(List<T> origin, Predicate<T> filter) {

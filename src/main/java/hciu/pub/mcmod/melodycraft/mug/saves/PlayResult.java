@@ -64,6 +64,10 @@ public class PlayResult {
 		return acc;
 	}
 
+	public String accStr() {
+		return ((int) (acc * 100) + "." + String.format("%02d", ((int) (acc * 10000) % 100)) + "%");
+	}
+
 	public void setAcc(double acc) {
 		this.acc = acc;
 	}
@@ -82,6 +86,14 @@ public class PlayResult {
 
 	public void setTime(long time) {
 		this.time = time;
+	}
+
+	public boolean checkFC() {
+		return judge[3] == 0;
+	}
+
+	public boolean checkAP() {
+		return judge[1] + judge[2] + judge[3] == 0;
 	}
 
 }
