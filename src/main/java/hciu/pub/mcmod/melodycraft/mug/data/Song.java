@@ -2,7 +2,10 @@ package hciu.pub.mcmod.melodycraft.mug.data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -195,9 +198,10 @@ public class Song {
 		Map<String, String> props = new HashMap<>();
 		try {
 			Song song = new Song();
-			Scanner sc = new Scanner(new FileInputStream(songinfo));
+			Scanner sc = new Scanner(new InputStreamReader(new FileInputStream(songinfo), "UTF-8"));
 			while (sc.hasNextLine()) {
 				String s = sc.nextLine();
+
 				String[] arr = s.split("=");
 				if (arr.length == 1) {
 					props.put(arr[0], "undefined");

@@ -2,6 +2,8 @@ package hciu.pub.mcmod.melodycraft.mug.data;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -165,9 +167,10 @@ abstract public class Chart {
 	public static Chart loadChartFromFile(File file) {
 		Map<String, String> props = new HashMap<>();
 		try {
-			Scanner sc = new Scanner(new FileInputStream(file));
+			Scanner sc = new Scanner(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			while (sc.hasNextLine()) {
 				String s = sc.nextLine();
+				
 				if (s.equals("notes:")) {
 					break;
 				}

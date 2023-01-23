@@ -562,7 +562,6 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 
 		getGame().judgeNote(note.getId(), result, false);
 	}
-
 	@Override
 	public void onResizeSelf() {
 		int bgsz = Math.min(ratioX(0.5) - 50, getSizeY() - 45);
