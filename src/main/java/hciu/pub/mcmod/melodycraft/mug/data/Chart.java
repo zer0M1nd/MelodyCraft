@@ -12,13 +12,88 @@ import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.mug.data.Note.NoteKeyMode;
+import hciu.pub.mcmod.melodycraft.utils.MD5;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 import net.minecraft.client.resources.I18n;
 
 abstract public class Chart {
 
-	protected String info = "";
-	protected String author = "";
+	public static class Identifier {
+		private String info = "";
+		private String author = "";
+		private String md5 = "";
+
+		public Identifier(String info, String author, String md5) {
+			super();
+			this.info = info;
+			this.author = author;
+			this.md5 = md5;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((author == null) ? 0 : author.hashCode());
+			result = prime * result + ((info == null) ? 0 : info.hashCode());
+			result = prime * result + ((md5 == null) ? 0 : md5.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Identifier other = (Identifier) obj;
+			if (author == null) {
+				if (other.author != null)
+					return false;
+			} else if (!author.equals(other.author))
+				return false;
+			if (info == null) {
+				if (other.info != null)
+					return false;
+			} else if (!info.equals(other.info))
+				return false;
+			if (md5 == null) {
+				if (other.md5 != null)
+					return false;
+			} else if (!md5.equals(other.md5))
+				return false;
+			return true;
+		}
+
+		public String getInfo() {
+			return info;
+		}
+
+		public void setInfo(String info) {
+			this.info = info;
+		}
+
+		public String getAuthor() {
+			return author;
+		}
+
+		public void setAuthor(String author) {
+			this.author = author;
+		}
+
+		public String getMd5() {
+			return md5;
+		}
+
+		public void setMd5(String md5) {
+			this.md5 = md5;
+		}
+
+	}
+
+	protected Identifier identifier;
 	protected String date = "";
 	protected List<Note> notes = new ArrayList<Note>();
 	protected int difficulty = 0;
@@ -26,6 +101,10 @@ abstract public class Chart {
 	protected int delay = 0;
 	protected File file;
 
+	public Identifier getIdentifier() {
+		return identifier;
+	}
+	
 	public int getDifficulty() {
 		return difficulty;
 	}
@@ -47,11 +126,11 @@ abstract public class Chart {
 	}
 
 	public String getInfo() {
-		return info;
+		return identifier.info;
 	}
 
 	public String getInfoDifficulty() {
-		return info + " Lv." + getDifficulty();
+		return identifier.info + " Lv." + getDifficulty();
 	}
 
 	public List<Note> getNotes() {
@@ -59,7 +138,7 @@ abstract public class Chart {
 	}
 
 	public String getAuthor() {
-		return author;
+		return identifier.author;
 	}
 
 	public String getDate() {
@@ -116,9 +195,14 @@ abstract public class Chart {
 				throw new IllegalArgumentException("Unknown or undefined chart type!");
 			}
 			chart.file = file;
-			chart.author = props.get("author");
 			chart.date = MiscsHelper.timeFormat(file.lastModified(), "YYYY-MM-DD hh:mm:ss");
-			chart.info = props.get("info");
+
+			String info = props.get("info");
+			String author = props.get("author");
+			String md5 = MD5.get(file);
+
+			chart.identifier = new Identifier(info, author, md5);
+
 			while (sc.hasNextLine()) {
 				Note note = Note.readNote(sc.nextLine());
 				if (note instanceof NoteKeyMode && chart instanceof ChartKeyMode) {

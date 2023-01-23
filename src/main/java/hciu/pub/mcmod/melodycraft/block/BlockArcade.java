@@ -33,8 +33,8 @@ public class BlockArcade extends BlockContainer {
 
 	public BlockArcade() {
 		super(Material.IRON);
-		this.setRegistryName("arcade").setUnlocalizedName("arcade")
-				.setHardness(6).setResistance(5).setHarvestLevel("pickaxe", 2);
+		this.setRegistryName("arcade").setUnlocalizedName("arcade").setHardness(6).setResistance(5)
+				.setHarvestLevel("pickaxe", 2);
 		this.setCreativeTab(CreativeTabMelodyCraft.MELODYCRAFT_TAB);
 		this.setDefaultState(
 				this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(UPPER, false));
@@ -99,7 +99,8 @@ public class BlockArcade extends BlockContainer {
 		if (!worldIn.isRemote) {
 			return true;
 		}
-		Minecraft.getMinecraft().displayGuiScreen(new GuiMain(null, (TileEntityArcade) worldIn.getTileEntity(pos)));
+		Minecraft.getMinecraft().displayGuiScreen(
+				new GuiMain(null, (TileEntityArcade) worldIn.getTileEntity(state.getValue(UPPER) ? pos.down() : pos)));
 		// playerIn.sendMessage(
 		// new TextComponentString("Value:" + ((TileEntityMatterDestroyer)
 		// worldIn.getTileEntity(pos)).value));

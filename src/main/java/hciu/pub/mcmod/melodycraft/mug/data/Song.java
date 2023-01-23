@@ -15,29 +15,110 @@ import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
+import hciu.pub.mcmod.melodycraft.utils.MD5;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 
 public class Song {
 
-	protected String name;
-	protected String artist;
+	public static class Identifier {
+
+		private String name;
+		private String artist;
+		private String md5;
+
+		public Identifier(String name, String artist, String md5) {
+			super();
+			this.name = name;
+			this.artist = artist;
+			this.md5 = md5;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+			result = prime * result + ((md5 == null) ? 0 : md5.hashCode());
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Identifier other = (Identifier) obj;
+			if (artist == null) {
+				if (other.artist != null)
+					return false;
+			} else if (!artist.equals(other.artist))
+				return false;
+			if (md5 == null) {
+				if (other.md5 != null)
+					return false;
+			} else if (!md5.equals(other.md5))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getArtist() {
+			return artist;
+		}
+
+		public void setArtist(String artist) {
+			this.artist = artist;
+		}
+
+		public String getMd5() {
+			return md5;
+		}
+
+		public void setMd5(String md5) {
+			this.md5 = md5;
+		}
+
+	}
+
+	private Identifier identifier;
+
 	protected String bpm;
 	protected String date;
 	protected File songfile;
 	protected File bgfile;
 	protected int id = 0;
 	protected List<Chart> charts = new ArrayList<Chart>();
-	
+
+	public Identifier getIdentifier() {
+		return identifier;
+	}
+
 	public int getId() {
 		return id;
 	}
 
 	public String getName() {
-		return name;
+		return identifier.name;
 	}
 
 	public String getArtist() {
-		return artist;
+		return identifier.artist;
 	}
 
 	public String getBpm() {
@@ -91,8 +172,8 @@ public class Song {
 					Chart chart = Chart.loadChartFromFile(f);
 					if (chart != null) {
 						song.charts.add(chart);
-						MelodyCraftMod.getLogger()
-								.info("Song " + song.name + " Chart " + chart.info + " Diff " + chart.difficulty);
+						MelodyCraftMod.getLogger().info(
+								"Song " + song.getName() + " Chart " + chart.getInfo() + " Diff " + chart.difficulty);
 					}
 				}
 			}
@@ -128,8 +209,12 @@ public class Song {
 				}
 			}
 			sc.close();
-			song.name = props.get("name");
-			song.artist = props.get("artist");
+			String name = props.get("name");
+			String artist = props.get("artist");
+			String md5 = MD5.get(songfile);
+
+			song.identifier = new Identifier(name, artist, md5);
+
 			song.bpm = props.get("bpm");
 			song.date = MiscsHelper.timeFormat(songinfo.lastModified(), "YYYY-MM-DD hh:mm:ss");
 			song.songfile = songfile;

@@ -16,7 +16,10 @@ import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettings;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
+import hciu.pub.mcmod.melodycraft.mug.saves.PlayResult;
+import hciu.pub.mcmod.melodycraft.mug.saves.ResultManager;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
+import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -123,6 +126,14 @@ public class GuiResult extends GuiMelodyCraftBase {
 						new GuiGame(parent.getParent(), game.getTileEntity(), parent.getClientSettings()));
 			}
 		}.setResizeAction(x -> x.setCenterSize(getSizeX() - 160, getSizeY() - 20, 80, 20)));
+
+	}
+
+	public void saveResult() {
+		PlayResult r = new PlayResult(game.getSong().getIdentifier(), game.getChart().getIdentifier(),
+				game.getSettings().getJudge(), game.getScore(), game.getAcc(), game.getJudge(),
+				MiscsHelper.currentTime());
+		ResultManager.getInstance().add(r);
 
 	}
 

@@ -24,5 +24,10 @@ public class MiscsHelper {
 				.replace("ss", String.format("%02d", now.get(Calendar.SECOND)))
 				.replace("iii", String.format("%03d", now.get(Calendar.MILLISECOND)));
 	}
+	
+	public static long currentTime() {
+		Calendar now = Calendar.getInstance();
+		return now.getTimeInMillis();
+	}
 
 }
