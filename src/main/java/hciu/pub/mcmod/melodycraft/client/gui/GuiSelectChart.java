@@ -125,7 +125,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 		} else {
 			String t = x.getInfo();
 			t = t + "\n" + I18n.format("melodycraft.gui.author", x.getAuthor());
-			t = t + "\n" + I18n.format("melodycraft.gui.mode", x.getModeName());
+			t = t + "\n" + I18n.format("melodycraft.gui.mode", I18n.format("melodycraft." + x.getModeName()));
 			t = t + "\n" + I18n.format("melodycraft.gui.difficulty", Integer.toString(x.getDifficulty()));
 			t = t + "\n" + I18n.format("melodycraft.gui.date", x.getDate());
 
