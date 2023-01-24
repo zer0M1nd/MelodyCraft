@@ -19,10 +19,11 @@ melodycraft.gui.searchsong=Search...
 melodycraft.gui.preview=Preview
 melodycraft.gui.stoppreview=Stop Preview
 melodycraft.gui.judge=Judge difficulty
+melodycraft.gui.settings=Settings
 
 melodycraft.gui.artist=Artist:%s
 melodycraft.gui.bpm=BPM: %s
-melodycraft.gui.date=Addition date:%s
+melodycraft.gui.date=Addition Date:%s
 
 melodycraft.gui.neverplayed=You never played this yet.
 melodycraft.gui.bestscore=Best score:
@@ -45,6 +46,8 @@ melodycraft.gui.list.bottom=▼▼
 
 melodycraft.gui.button.left=◄
 melodycraft.gui.button.right=►
+melodycraft.gui.button.left2=◄◄
+melodycraft.gui.button.right2=►►
 melodycraft.gui.button.finish=Finish
 
 melodycraft.gui.button.save=Save
