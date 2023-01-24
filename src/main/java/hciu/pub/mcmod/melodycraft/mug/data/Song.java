@@ -2,22 +2,17 @@ package hciu.pub.mcmod.melodycraft.mug.data;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.commons.codec.digest.Md5Crypt;
-
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
-import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
 import hciu.pub.mcmod.melodycraft.utils.MD5;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 

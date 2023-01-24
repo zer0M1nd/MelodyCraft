@@ -1,11 +1,9 @@
 package hciu.pub.mcmod.melodycraft.mug.saves;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +14,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
-import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
-import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGame;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.utils.MiscsHelper;
 import hciu.pub.mcmod.melodycraft.utils.ReflectionHelper;
