@@ -8,6 +8,7 @@ import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiConstants;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
+import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.client.gui.GuiGame;
 import hciu.pub.mcmod.melodycraft.client.gui.GuiMelodyCraftConstants;
 import hciu.pub.mcmod.melodycraft.client.gui.GuiResult;
@@ -480,7 +481,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 	@Override
 	public void onKeyPressed(char typedChar, int keyCode) {
 		if (keyCode == Keyboard.KEY_RETURN) {
-			if (buttonNext.isVisible()) {
+			if (MelodyCraftMod.DEBUG || buttonNext.isVisible()) {
 				buttonNext.onMouseClicked(0, 0, 0);
 				return;
 			}

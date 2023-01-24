@@ -2,6 +2,7 @@ package hciu.pub.mcmod.melodycraft.mug;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.Note;
@@ -28,7 +29,7 @@ public abstract class MelodyCraftGame {
 	protected EnumJudge lastJudge = EnumJudge.MISS;
 	protected long lastJudgeTime = -1111111111;
 	protected boolean lastJudgeLate = false;
-	protected EntityPlayer player;
+	protected UUID player;
 	protected EnumGameSide side;
 	protected EnumGameState state = EnumGameState.INIT;
 	protected long pausedAt = 0;
@@ -50,7 +51,7 @@ public abstract class MelodyCraftGame {
 	}
 
 	public MelodyCraftGame(TileEntityArcade te, Song song, Chart chart, MelodyCraftGameSettings settings,
-			EntityPlayer player, EnumGameSide side) {
+			UUID player, EnumGameSide side) {
 		this.tileEntity = te;
 		this.song = song;
 		this.chart = chart;
@@ -89,7 +90,7 @@ public abstract class MelodyCraftGame {
 	}
 
 	public void setGameTimeMillis(long t) {
-		if(this.state == EnumGameState.PAUSED) {
+		if (this.state == EnumGameState.PAUSED) {
 			pausedAt = t;
 		} else {
 			this.relativeTimeMillis = Minecraft.getSystemTime() - t;
@@ -183,7 +184,7 @@ public abstract class MelodyCraftGame {
 		resume();
 		this.state = EnumGameState.ENDED;
 	}
-	
+
 	public String getGameModeName() {
 		return "Unknown game mode";
 	}

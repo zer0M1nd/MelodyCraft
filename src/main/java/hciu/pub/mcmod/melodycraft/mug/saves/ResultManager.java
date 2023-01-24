@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -150,16 +152,16 @@ public class ResultManager {
 		resultNew.get(r.getChartid()).add(r);
 	}
 
-	public List<PlayResult> getAllFor(Chart chart) {
+	public List<PlayResult> getAllFor(Chart chart, UUID player) {
 		ArrayList<PlayResult> arr = new ArrayList<>();
 		arr.addAll(resultLoaded.getOrDefault(chart.getIdentifier(), new ArrayList<>()));
 		arr.addAll(resultNew.getOrDefault(chart.getIdentifier(), new ArrayList<>()));
-		return ImmutableList.copyOf(arr);
+		return arr.stream().filter(x -> x.getPlayerUUID().equals(player)).collect(Collectors.toList());
 	}
 
-	public PlayResult getBestFor(Chart chart) {
-		return getAllFor(chart).stream().sorted((x, y) -> Integer.compare(y.getScore(), x.getScore())).findFirst()
-				.orElse(null);
+	public PlayResult getBestFor(Chart chart, UUID player) {
+		return getAllFor(chart, player).stream().sorted((x, y) -> Integer.compare(y.getScore(), x.getScore()))
+				.findFirst().orElse(null);
 	}
 
 }

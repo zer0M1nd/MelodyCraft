@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
+import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftSimpleList;
@@ -20,6 +21,7 @@ import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiSelectChart extends GuiMelodyCraftBase {
 
@@ -53,8 +55,9 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 				updateText();
 			}
 		});
-		listChart.setButtonTexts(new String[] { I18n.format("melodycraft.gui.list.top"), I18n.format("melodycraft.gui.list.up"),
-				I18n.format("melodycraft.gui.list.down"), I18n.format("melodycraft.gui.list.bottom") });
+		listChart.setButtonTexts(
+				new String[] { I18n.format("melodycraft.gui.list.top"), I18n.format("melodycraft.gui.list.up"),
+						I18n.format("melodycraft.gui.list.down"), I18n.format("melodycraft.gui.list.bottom") });
 		listChart.setItems(song.getCharts());
 		listChart.setDisplayFunction(e -> e.getInfoDifficulty());
 		if (song.getBgfile() == null) {
@@ -84,8 +87,8 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 	private void startGame(Song song, Chart chart, MelodyCraftGameSettings settings) {
 		MelodyCraftGameKeys game = null;
 		if (chart instanceof ChartKeyMode) {
-			game = new MelodyCraftGameKeys(tileEntity, song, (ChartKeyMode) chart, settings,
-					Minecraft.getMinecraft().player, EnumGameSide.CONTROLLED);
+			game = new MelodyCraftGameKeys(tileEntity, song, (ChartKeyMode) chart, settings, MelodyCraftMod.getMyUUID(),
+					EnumGameSide.CONTROLLED);
 		} else {
 			throw new IllegalArgumentException("Unknown Chart Type! Unexpected!");
 		}
@@ -131,7 +134,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 
 			t = t + "\n\n";
 
-			PlayResult res = ResultManager.getInstance().getBestFor(x);
+			PlayResult res = ResultManager.getInstance().getBestFor(x, MelodyCraftMod.getMyUUID());
 
 			if (res == null) {
 				t = t + "\n" + I18n.format("melodycraft.gui.neverplayed");

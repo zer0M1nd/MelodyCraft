@@ -1,5 +1,7 @@
 package hciu.pub.mcmod.melodycraft.mug.saves;
 
+import java.util.UUID;
+
 import hciu.pub.mcmod.melodycraft.mug.EnumJudgeLevel;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
@@ -16,8 +18,10 @@ public class PlayResult {
 	private int[] judge;
 	private long time;
 
+	private UUID playerUUID;
+
 	public PlayResult(Identifier songid, hciu.pub.mcmod.melodycraft.mug.data.Chart.Identifier chartid,
-			EnumJudgeLevel judgeLevel, int score, double acc, int[] judge, long time) {
+			EnumJudgeLevel judgeLevel, int score, double acc, int[] judge, long time, UUID playerUUID) {
 		super();
 		this.songid = songid;
 		this.chartid = chartid;
@@ -26,6 +30,15 @@ public class PlayResult {
 		this.acc = acc;
 		this.judge = judge;
 		this.time = time;
+		this.playerUUID = playerUUID;
+	}
+
+	public UUID getPlayerUUID() {
+		return playerUUID;
+	}
+
+	public void setPlayerUUID(UUID playerUUID) {
+		this.playerUUID = playerUUID;
 	}
 
 	public Song.Identifier getSongid() {

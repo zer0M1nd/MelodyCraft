@@ -2,6 +2,7 @@ package hciu.pub.mcmod.melodycraft.client.gui;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
+import hciu.pub.mcmod.melodycraft.MelodyCraftMod;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGame;
@@ -34,10 +35,10 @@ public class GuiResult extends GuiMelodyCraftBase {
 
 		addComponent(new SmartGuiTextLabel(this, I18n.format("melodycraft.gui.result.title")).setCentered(true)
 				.setResizeAction(x -> x.setCenterSize(ratioX(0.5), 12, 100, 16)));
-		
-		PlayResult res = ResultManager.getInstance().getBestFor(game.getChart());
+
+		PlayResult res = ResultManager.getInstance().getBestFor(game.getChart(), MelodyCraftMod.getMyUUID());
 		int history = res == null ? 0 : res.getScore();
-		
+
 		addComponent(new SmartGuiTextLabel(this) {
 			{
 				String s = "";
@@ -46,7 +47,8 @@ public class GuiResult extends GuiMelodyCraftBase {
 				s += game.getChart().getInfoDifficulty() + "\n\n";
 				s += I18n.format("melodycraft.gui.result.maxcombo") + "\n";
 				s += I18n.format("melodycraft.gui.result.score") + "\n";
-				s += (game.getScore() > history ? I18n.format("melodycraft.gui.result.newrecord") : I18n.format("melodycraft.gui.result.record")) + "\n";
+				s += (game.getScore() > history ? I18n.format("melodycraft.gui.result.newrecord")
+						: I18n.format("melodycraft.gui.result.record")) + "\n";
 				s += "\n";
 				s += I18n.format("melodycraft.gui.result.acc") + "\n";
 				s += "\n\n\n\n";
@@ -129,7 +131,7 @@ public class GuiResult extends GuiMelodyCraftBase {
 	public void saveResult() {
 		PlayResult r = new PlayResult(game.getSong().getIdentifier(), game.getChart().getIdentifier(),
 				game.getSettings().getJudge(), game.getScore(), game.getAcc(), game.getJudge(),
-				MiscsHelper.currentTime());
+				MiscsHelper.currentTime(), MelodyCraftMod.getMyUUID());
 		ResultManager.getInstance().add(r);
 
 	}

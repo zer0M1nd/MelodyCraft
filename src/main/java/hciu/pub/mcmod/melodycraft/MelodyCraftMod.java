@@ -1,10 +1,13 @@
 package hciu.pub.mcmod.melodycraft;
 
 import java.io.File;
+import java.util.UUID;
 
 import org.apache.logging.log4j.Logger;
 
 import hciu.pub.mcmod.melodycraft.client.ClientProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -22,6 +25,8 @@ public class MelodyCraftMod {
 	public static final String NAME = "MelodyCraft";
 	public static final String VERSION = "@version@";
 
+	public static final boolean DEBUG = true;
+
 	@Instance(MODID)
 	private static MelodyCraftMod instance;
 
@@ -30,7 +35,6 @@ public class MelodyCraftMod {
 	private static File configPath;
 	private static MinecraftServer mcServer;
 	private static Logger logger;
-	
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -58,7 +62,7 @@ public class MelodyCraftMod {
 
 	@EventHandler
 	public void onStop(FMLServerStoppingEvent e) {
-		//System.out.println("stopping");
+		// System.out.println("stopping");
 		proxy.onStop(e);
 	}
 
@@ -80,5 +84,9 @@ public class MelodyCraftMod {
 
 	public static Logger getLogger() {
 		return logger;
+	}
+
+	public static UUID getMyUUID() {
+		return EntityPlayer.getUUID(Minecraft.getMinecraft().getSession().getProfile());
 	}
 }

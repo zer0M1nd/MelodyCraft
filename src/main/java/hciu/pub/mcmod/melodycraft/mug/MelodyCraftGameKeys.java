@@ -4,13 +4,16 @@ import hciu.pub.mcmod.melodycraft.mug.data.NoteInPlay.NoteKeyModeLongInPlay;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.entity.player.EntityPlayer;
 import hciu.pub.mcmod.melodycraft.mug.data.Song;
+
+import java.util.UUID;
+
 import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
 
 public class MelodyCraftGameKeys extends MelodyCraftGame {
 	protected boolean[] laneState = new boolean[0];
 
 	public MelodyCraftGameKeys(TileEntityArcade tileEntity, Song song, ChartKeyMode chart,
-			MelodyCraftGameSettings settings, EntityPlayer player, EnumGameSide side) {
+			MelodyCraftGameSettings settings, UUID player, EnumGameSide side) {
 		super(tileEntity, song, chart, settings, player, side);
 	}
 
