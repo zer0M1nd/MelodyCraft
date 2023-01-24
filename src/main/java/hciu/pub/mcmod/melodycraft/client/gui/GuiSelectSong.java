@@ -60,16 +60,16 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 				if (currentlyPlaying != null) {
 					ExternalSoundHandler.getInstance().stopSound(currentlyPlaying);
 					currentlyPlaying = null;
-					setText(I18n.format("gui.preview"));
+					setText(I18n.format("melodycraft.gui.preview"));
 				} else {
 					currentlyPlaying = ExternalSoundHandler.getInstance().playSound(listSong.getSelectedItem());
-					setText(I18n.format("gui.stoppreview"));
+					setText(I18n.format("melodycraft.gui.stoppreview"));
 				}
 			}
 		});
-		buttonNext.setText(I18n.format("gui.next"));
-		buttonBack.setText(I18n.format("gui.back"));
-		buttonPreview.setText(I18n.format("gui.preview"));
+		buttonNext.setText(I18n.format("melodycraft.gui.next"));
+		buttonBack.setText(I18n.format("melodycraft.gui.back"));
+		buttonPreview.setText(I18n.format("melodycraft.gui.preview"));
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
 		addComponent(labelInfo = new SmartGuiTextLabel(this));
 		;
@@ -83,9 +83,9 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 					return;
 				}
 				String s = song.getName();
-				s = s + "\n" + I18n.format("gui.artist", song.getArtist());
-				s = s + "\n" + I18n.format("gui.bpm", song.getBpm());
-				s = s + "\n" + I18n.format("gui.date", song.getDate());
+				s = s + "\n" + I18n.format("melodycraft.gui.artist", song.getArtist());
+				s = s + "\n" + I18n.format("melodycraft.gui.bpm", song.getBpm());
+				s = s + "\n" + I18n.format("melodycraft.gui.date", song.getDate());
 				labelInfo.setText(s);
 				if (song.getBgfile() == null) {
 					pictureBg.setTexture(GuiMelodyCraftConstants.MISCS, 0, 128, 128, 128);
@@ -94,8 +94,8 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 				}
 			}
 		});
-		listSong.setButtonTexts(new String[] { I18n.format("gui.list.top"), I18n.format("gui.list.up"),
-				I18n.format("gui.list.down"), I18n.format("gui.list.bottom") });
+		listSong.setButtonTexts(new String[] { I18n.format("melodycraft.gui.list.top"), I18n.format("melodycraft.gui.list.up"),
+				I18n.format("melodycraft.gui.list.down"), I18n.format("melodycraft.gui.list.bottom") });
 		listSong.setItems(SongList.getSongs());
 		listSong.setDisplayFunction(e -> e.getName());
 		addComponent(textSearch = new GuiMelodyCraftTextField(this) {
@@ -111,7 +111,7 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 			}
 
 		});
-		textSearch.setDefaultText(I18n.format("gui.searchsong"));
+		textSearch.setDefaultText(I18n.format("melodycraft.gui.searchsong"));
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 		addComponent(buttonSettings = new GuiMelodyCraftButton(this) {
 			@Override
@@ -119,7 +119,7 @@ public class GuiSelectSong extends GuiMelodyCraftBase {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSettings(getSupreme()));
 			}
 		});
-		buttonSettings.setText(I18n.format("gui.settings"));
+		buttonSettings.setText(I18n.format("melodycraft.gui.settings"));
 	}
 
 	@Override

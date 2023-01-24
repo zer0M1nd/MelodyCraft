@@ -1,89 +1,88 @@
-charttype.4k=4K
-charttype.5k=5K
-charttype.6k=6K
-charttype.7k=7K
+melodycraft.charttype.4k=4K
+melodycraft.charttype.5k=5K
+melodycraft.charttype.6k=6K
+melodycraft.charttype.7k=7K
 
-command.convert.success=导入成功！
-command.convert.fail=导入失败，请查看控制台输出日志！
-command.reload=重载成功！
+melodycraft.command.convert.success=导入成功！
+melodycraft.command.convert.fail=导入失败，请查看控制台输出日志！
+melodycraft.command.reload=重载成功！
 
 itemGroup.melodycraft=MelodyCraft
 
 tile.arcade.name=MelodyCraft 街机
 
-gui.singleplayer=单人游戏
+melodycraft.gui.singleplayer=单人游戏
 
-gui.next=选择
-gui.back=返回
-gui.searchsong=搜索歌曲...
-gui.preview=预览
-gui.stoppreview=停止预览
-gui.judge=判定难度
-gui.settings=设置
+melodycraft.gui.next=选择
+melodycraft.gui.back=返回
+melodycraft.gui.searchsong=搜索歌曲...
+melodycraft.gui.preview=预览
+melodycraft.gui.stoppreview=停止预览
+melodycraft.gui.judge=判定难度
+melodycraft.gui.settings=设置
 
-gui.artist=曲师: %s
-gui.bpm=BPM: %s
-gui.date=添加日期: %s
+melodycraft.gui.artist=曲师: %s
+melodycraft.gui.bpm=BPM: %s
+melodycraft.gui.date=添加日期: %s
 
-gui.neverplayed=你从未玩过这张谱面
-gui.bestscore=最好成绩：
+melodycraft.gui.neverplayed=你从未玩过这张谱面
+melodycraft.gui.bestscore=最好成绩：
 
-gui.author=谱师：%s
-gui.mode=模式：%s
-gui.difficulty=难度：%s
-gui.startgame=开始游戏
+melodycraft.gui.author=谱师：%s
+melodycraft.gui.mode=模式：%s
+melodycraft.gui.difficulty=难度：%s
+melodycraft.gui.startgame=开始游戏
 
-gui.paused=游戏暂停
-gui.button.pause=暂停
-gui.button.resume=继续
-gui.button.restart=重新开始
-gui.button.quit=退出
+melodycraft.gui.paused=游戏暂停
+melodycraft.gui.button.pause=暂停
+melodycraft.gui.button.resume=继续
+melodycraft.gui.button.restart=重新开始
+melodycraft.gui.button.quit=退出
 
-gui.list.top=▲▲
-gui.list.up=▲
-gui.list.down=▼
-gui.list.bottom=▼▼
+melodycraft.gui.list.top=▲▲
+melodycraft.gui.list.up=▲
+melodycraft.gui.list.down=▼
+melodycraft.gui.list.bottom=▼▼
 
-gui.button.left=◄
-gui.button.right=►
-gui.button.left2=◄◄
-gui.button.right2=►►
-gui.button.finish=完成
+melodycraft.gui.button.left=◄
+melodycraft.gui.button.right=►
+melodycraft.gui.button.left2=◄◄
+melodycraft.gui.button.right2=►►
+melodycraft.gui.button.finish=完成
+
+melodycraft.gui.button.save=保存
+melodycraft.gui.button.cancel=取消保存
+
+melodycraft.gui.settings.title=游戏设置
+melodycraft.gui.settings.judge=判定难度
+melodycraft.gui.settings.speed=谱面流速
+melodycraft.gui.settings.delay=音频延迟
+melodycraft.gui.settings.judgedelay=判定延迟
+melodycraft.gui.settings.norender=取消世界渲染
+melodycraft.gui.settings.nosound=取消外部声音
+
+melodycraft.gui.settings.on=开
+melodycraft.gui.settings.off=关
+
+melodycraft.gui.settings.keybindings=按键绑定：
+
+melodycraft.gui.result.title=游戏结果
+melodycraft.gui.result.button.retry=重试
+melodycraft.gui.result.button.next=继续
 
 
-gui.button.save=保存
-gui.button.cancel=取消保存
+melodycraft.gui.result.score=分数
+melodycraft.gui.result.acc=ACC
 
-gui.settings.title=游戏设置
-gui.settings.judge=判定难度
-gui.settings.speed=谱面流速
-gui.settings.delay=音频延迟
-gui.settings.judgedelay=判定延迟
-gui.settings.norender=取消世界渲染
-gui.settings.nosound=取消外部声音
+melodycraft.gui.judge.perfect=Perfect
+melodycraft.gui.judge.great=Great
+melodycraft.gui.judge.good=Good
+melodycraft.gui.judge.miss=Miss
 
-gui.settings.on=开
-gui.settings.off=关
+melodycraft.gui.result.ap=All Perfect!
+melodycraft.gui.result.fc=Full Combo!
 
-gui.settings.keybindings=按键绑定：
+melodycraft.gui.result.maxcombo=Max Combo
 
-gui.result.title=游戏结果
-gui.result.button.retry=重试
-gui.result.button.next=继续
-
-
-gui.result.score=分数
-gui.result.acc=ACC
-
-gui.judge.perfect=Perfect
-gui.judge.great=Great
-gui.judge.good=Good
-gui.judge.miss=Miss
-
-gui.result.ap=All Perfect!
-gui.result.fc=Full Combo!
-
-gui.result.maxcombo=Max Combo
-
-gui.result.newrecord=新纪录！
-gui.result.record=历史记录
+melodycraft.gui.result.newrecord=新纪录！
+melodycraft.gui.result.record=历史记录

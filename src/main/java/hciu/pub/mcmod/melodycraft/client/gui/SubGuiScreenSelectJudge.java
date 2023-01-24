@@ -43,9 +43,9 @@ public class SubGuiScreenSelectJudge extends SmartGuiComponentBase {
 				SubGuiScreenSelectJudge.this.setVisible(false);
 			}
 		});
-		prev.setText(I18n.format("gui.button.left"));
-		next.setText(I18n.format("gui.button.right"));
-		finish.setText(I18n.format("gui.button.finish"));
+		prev.setText(I18n.format("melodycraft.gui.button.left"));
+		next.setText(I18n.format("melodycraft.gui.button.right"));
+		finish.setText(I18n.format("melodycraft.gui.button.finish"));
 		updateSelected(0);
 	}
 

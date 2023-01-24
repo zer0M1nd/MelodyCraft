@@ -1,16 +1,11 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
-import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextField;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
 import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClient;
-import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftClientKeys;
-import hciu.pub.mcmod.melodycraft.mug.EnumJudgeLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 
@@ -62,10 +57,10 @@ public class SubGuiScreenPause extends SmartGuiComponentBase {
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
 		});
-		paused.setText(I18n.format("gui.paused"));
-		resume.setText(I18n.format("gui.button.resume"));
-		restart.setText(I18n.format("gui.button.restart"));
-		quit.setText(I18n.format("gui.button.quit"));
+		paused.setText(I18n.format("melodycraft.gui.paused"));
+		resume.setText(I18n.format("melodycraft.gui.button.resume"));
+		restart.setText(I18n.format("melodycraft.gui.button.restart"));
+		quit.setText(I18n.format("melodycraft.gui.button.quit"));
 	}
 
 	@Override

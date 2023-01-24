@@ -22,6 +22,8 @@
 
 - 现在你应该可以在 Eclipse 里编译运行了。如果你需要导出，请将 HCIU's Utils 打包（gradlew build），扔进 libs 里。
 
+- 若要导出为jar在游戏中正常运行，你还需将HCIU's Utils单独导出为一个mod，并一同扔进mods里
+
 ## 添加谱面
 
 - 谱面格式暂时懒得写，想了解谱面格式可以去翻源代码

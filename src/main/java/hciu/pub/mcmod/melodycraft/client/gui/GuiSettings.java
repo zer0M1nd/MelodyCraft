@@ -1,36 +1,19 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import org.lwjgl.input.Keyboard;
-
-import com.google.common.base.Supplier;
-import com.google.common.collect.ImmutableList;
 
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
-import hciu.pub.mcmod.hciusutils.gui.render.AbstractTextureDrawer;
 import hciu.pub.mcmod.hciusutils.gui.render.FramedRectangleDrawer;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
-import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
-import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftSimpleList;
-import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftTextField;
-import hciu.pub.mcmod.melodycraft.client.sound.ExternalSoundHandler;
 import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import hciu.pub.mcmod.melodycraft.mug.EnumJudgeLevel;
-import hciu.pub.mcmod.melodycraft.mug.data.Song;
-import hciu.pub.mcmod.melodycraft.mug.data.SongList;
-import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import scala.actors.threadpool.Arrays;
 
 public class GuiSettings extends GuiMelodyCraftBase {
 
@@ -53,19 +36,19 @@ public class GuiSettings extends GuiMelodyCraftBase {
 		getGamemodes();
 		config = MelodyCraftGameConfig.getInstance();
 
-		addComponent(new SmartGuiTextLabel(this, I18n.format("gui.settings.title")) {
+		addComponent(new SmartGuiTextLabel(this, I18n.format("melodycraft.gui.settings.title")) {
 			{
 				setCentered(true);
 			}
 		}.setResizeAction(x -> x.setCenterSize(getSizeX() / 2, 20, 100, 20)));
-		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.button.save")) {
+		addComponent(new GuiMelodyCraftButton(this, I18n.format("melodycraft.gui.button.save")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				MelodyCraftGameConfig.save();
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
 		}.setResizeAction(x -> x.setCenterSize(getSizeX() - 60, getSizeY() - 20, 80, 20)));
-		addComponent(new GuiMelodyCraftButton(this, I18n.format("gui.button.cancel")) {
+		addComponent(new GuiMelodyCraftButton(this, I18n.format("melodycraft.gui.button.cancel")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				MelodyCraftGameConfig.load();
@@ -78,14 +61,14 @@ public class GuiSettings extends GuiMelodyCraftBase {
 		for (int i = 0; i < entry.length; i++) {
 			int y = 40 + 30 * i;
 			String name = entry[i];
-			addComponent(new SmartGuiTextLabel(this, I18n.format("gui.settings." + name))
+			addComponent(new SmartGuiTextLabel(this, I18n.format("melodycraft.gui.settings." + name))
 					.setResizeAction(x -> x.setBounds(10, y + 6, 100, 20)));
 			int ii = i;
 			if (i == 0) {
 				for (int k : new int[] { -1, 1 }) {
 
 					addComponent(
-							new GuiMelodyCraftButton(this, I18n.format("gui.button." + (k == 1 ? "right" : "left"))) {
+							new GuiMelodyCraftButton(this, I18n.format("melodycraft.gui.button." + (k == 1 ? "right" : "left"))) {
 								@Override
 								public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 									int j = Math.max(0, Math.min(config.getGlobal().getJudge().ordinal() + k,
@@ -107,8 +90,8 @@ public class GuiSettings extends GuiMelodyCraftBase {
 
 				for (int k = 0; k < 4; k++) {
 					int kk = k, d = new int[] { -10, -1, 1, 10 }[k];
-					addComponent(new GuiMelodyCraftButton(this, I18n.format(new String[] { "gui.button.left2",
-							"gui.button.left", "gui.button.right", "gui.button.right2" }[k])) {
+					addComponent(new GuiMelodyCraftButton(this, I18n.format(new String[] { "melodycraft.gui.button.left2",
+							"melodycraft.gui.button.left", "melodycraft.gui.button.right", "melodycraft.gui.button.right2" }[k])) {
 						@Override
 						public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 							int v = (ii == 1 ? config.getGlobal().getSpeed()
@@ -143,7 +126,7 @@ public class GuiSettings extends GuiMelodyCraftBase {
 			} else {
 				addComponent(new GuiMelodyCraftButton(this) {
 					{
-						setText(I18n.format(get() ? "gui.settings.on" : "gui.settings.off"));
+						setText(I18n.format(get() ? "melodycraft.gui.settings.on" : "melodycraft.gui.settings.off"));
 					}
 
 					private boolean get() {
@@ -161,7 +144,7 @@ public class GuiSettings extends GuiMelodyCraftBase {
 						} else {
 							config.getClient().setNoSound(!get());
 						}
-						setText(I18n.format(get() ? "gui.settings.on" : "gui.settings.off"));
+						setText(I18n.format(get() ? "melodycraft.gui.settings.on" : "melodycraft.gui.settings.off"));
 					}
 				}.setResizeAction(x -> x.setBounds(80, y, 50, 20)));
 			}
@@ -201,8 +184,8 @@ public class GuiSettings extends GuiMelodyCraftBase {
 			subs[i].setVisible(i == selectedGamemode);
 		}
 
-		addComponent(new GuiMelodyCraftButton(this, () -> I18n.format("gui.settings.keybindings")
-				+ I18n.format("charttype." + gamemodes[selectedGamemode])) {
+		addComponent(new GuiMelodyCraftButton(this, () -> I18n.format("melodycraft.gui.settings.keybindings")
+				+ I18n.format("melodycraft.charttype." + gamemodes[selectedGamemode])) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				selectedGamemode = (selectedGamemode + 1) % gamemodes.length;

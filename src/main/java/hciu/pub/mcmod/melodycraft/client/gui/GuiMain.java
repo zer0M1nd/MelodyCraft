@@ -1,12 +1,10 @@
 package hciu.pub.mcmod.melodycraft.client.gui;
 
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiButton;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftButton;
 import hciu.pub.mcmod.melodycraft.client.gui.widgets.GuiMelodyCraftPictureBox;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 
 public class GuiMain extends GuiMelodyCraftBase {
@@ -23,7 +21,7 @@ public class GuiMain extends GuiMelodyCraftBase {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSelectSong(getSupreme(), GuiMain.this.tileEntity));
 			}
 		});
-		buttonSingleplayer.setText(I18n.format("gui.singleplayer"));
+		buttonSingleplayer.setText(I18n.format("melodycraft.gui.singleplayer"));
 		addComponent(pictureTitle = new GuiMelodyCraftPictureBox(this));
 		pictureTitle.setTexture(GuiMelodyCraftConstants.MISCS, 0, 0, 186, 33);
 		this.tileEntity = tileEntity;

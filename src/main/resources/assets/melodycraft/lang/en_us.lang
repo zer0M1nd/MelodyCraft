@@ -1,45 +1,85 @@
-charttype.4k=4K
-charttype.5k=5K
-charttype.6k=6K
-charttype.7k=7K
+melodycraft.charttype.4k=4K
+melodycraft.charttype.5k=5K
+melodycraft.charttype.6k=6K
+melodycraft.charttype.7k=7K
 
-command.convert.success=Convert successful!
-command.convert.fail=Convert failed, check the console output log!
-command.reload=Reload successful!
+melodycraft.command.convert.success=Convert successful!
+melodycraft.command.convert.fail=Convert failed, check the console output log!
+melodycraft.command.reload=Reload successful!
 
 itemGroup.melodycraft=MelodyCraft
 
 tile.arcade.name=MelodyCraft Arcade
 
-gui.singleplayer=Singleplayer
+melodycraft.gui.singleplayer=Singleplayer
 
-gui.next=Next
-gui.back=Back
-gui.searchsong=Search...
-gui.preview=Preview
-gui.stoppreview=Stop Preview
-gui.judge=Judge difficulty
+melodycraft.gui.next=Next
+melodycraft.gui.back=Back
+melodycraft.gui.searchsong=Search...
+melodycraft.gui.preview=Preview
+melodycraft.gui.stoppreview=Stop Preview
+melodycraft.gui.judge=Judge difficulty
 
-gui.artist=Artist:%s
-gui.bpm=BPM: %s
-gui.date=Addition date:%s
+melodycraft.gui.artist=Artist:%s
+melodycraft.gui.bpm=BPM: %s
+melodycraft.gui.date=Addition date:%s
 
-gui.author=Author:%s
-gui.mode=Mode:%s
-gui.difficulty=Difficulty:%s
-gui.startgame=Game Start
+melodycraft.gui.neverplayed=You never played this yet.
+melodycraft.gui.bestscore=Best score:
 
-gui.paused=PAUSE
-gui.button.pause=Pause
-gui.button.resume=Resume
-gui.button.restart=Restart
-gui.button.quit=Quit
+melodycraft.gui.author=Author:%s
+melodycraft.gui.mode=Mode:%s
+melodycraft.gui.difficulty=Difficulty:%s
+melodycraft.gui.startgame=Game Start
 
-gui.list.top=▲▲
-gui.list.up=▲
-gui.list.down=▼
-gui.list.bottom=▼▼
+melodycraft.gui.paused=PAUSE
+melodycraft.gui.button.pause=Pause
+melodycraft.gui.button.resume=Resume
+melodycraft.gui.button.restart=Restart
+melodycraft.gui.button.quit=Quit
 
-gui.button.left=◄
-gui.button.right=►
-gui.button.finish=完成
+melodycraft.gui.list.top=▲▲
+melodycraft.gui.list.up=▲
+melodycraft.gui.list.down=▼
+melodycraft.gui.list.bottom=▼▼
+
+melodycraft.gui.button.left=◄
+melodycraft.gui.button.right=►
+melodycraft.gui.button.finish=Finish
+
+melodycraft.gui.button.save=Save
+melodycraft.gui.button.cancel=Cancel Save
+
+melodycraft.gui.settings.title=Settings
+melodycraft.gui.settings.judge=Judge Difficulty
+melodycraft.gui.settings.speed=Speed
+melodycraft.gui.settings.delay=Sound Delay
+melodycraft.gui.settings.judgedelay=Judge Delay
+melodycraft.gui.settings.norender=No World Render
+melodycraft.gui.settings.nosound=No World Sound
+
+melodycraft.gui.settings.on=On
+melodycraft.gui.settings.off=Off
+
+melodycraft.gui.settings.keybindings=Keybindings:
+
+melodycraft.gui.result.title=Result
+melodycraft.gui.result.button.retry=Retry
+melodycraft.gui.result.button.next=Next
+
+
+melodycraft.gui.result.score=Score
+melodycraft.gui.result.acc=ACC
+
+melodycraft.gui.judge.perfect=Perfect
+melodycraft.gui.judge.great=Great
+melodycraft.gui.judge.good=Good
+melodycraft.gui.judge.miss=Miss
+
+melodycraft.gui.result.ap=All Perfect!
+melodycraft.gui.result.fc=Full Combo!
+
+melodycraft.gui.result.maxcombo=Max Combo
+
+melodycraft.gui.result.newrecord=NEW RECORD!
+melodycraft.gui.result.record=History:

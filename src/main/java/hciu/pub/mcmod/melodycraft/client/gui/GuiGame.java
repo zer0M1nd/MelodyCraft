@@ -14,7 +14,6 @@ import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.tileentity.TileEntityArcade;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import scala.swing.event.KeyPressed;
 
 public class GuiGame extends GuiMelodyCraftBase {
 
@@ -53,7 +52,7 @@ public class GuiGame extends GuiMelodyCraftBase {
 			}
 		});
 
-		pause.setText(I18n.format("gui.button.pause"));
+		pause.setText(I18n.format("melodycraft.gui.button.pause"));
 		pause.setVisible(true);
 
 		addKeyBinding(Keyboard.KEY_1, pause, false);

@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
 import hciu.pub.mcmod.hciusutils.gui.ISmartGuiComponent;
-import hciu.pub.mcmod.hciusutils.gui.SmartGuiComponentBase;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiConstants;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiScreen;
 import hciu.pub.mcmod.hciusutils.gui.SmartGuiTextLabel;
@@ -69,7 +68,7 @@ public class GuiMelodyCraftClientKeys extends GuiMelodyCraftClient {
 			pictureBg.setTexture(game.getSong().getBgfile(), 0, 0, 256, 256);
 		}
 
-		addComponent(buttonNext = new GuiMelodyCraftButton(this, I18n.format("gui.button.finish")) {
+		addComponent(buttonNext = new GuiMelodyCraftButton(this, I18n.format("melodycraft.gui.button.finish")) {
 			@Override
 			public void onMouseClicked(int mouseX, int mouseY, int mouseButton) {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiResult((GuiGame) getSupreme(), game));

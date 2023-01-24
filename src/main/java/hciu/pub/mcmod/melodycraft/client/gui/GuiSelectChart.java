@@ -12,7 +12,6 @@ import hciu.pub.mcmod.melodycraft.config.MelodyCraftGameConfig;
 import hciu.pub.mcmod.melodycraft.mug.EnumGameSide;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameKeys;
 import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettings;
-import hciu.pub.mcmod.melodycraft.mug.MelodyCraftGameSettingsClient;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart;
 import hciu.pub.mcmod.melodycraft.mug.data.Chart.ChartKeyMode;
 import hciu.pub.mcmod.melodycraft.mug.saves.PlayResult;
@@ -44,7 +43,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 				Minecraft.getMinecraft().displayGuiScreen(getSupreme().getParent());
 			}
 		});
-		buttonBack.setText(I18n.format("gui.back"));
+		buttonBack.setText(I18n.format("melodycraft.gui.back"));
 		addComponent(pictureBg = new GuiMelodyCraftPictureBox(this));
 		addComponent(labelInfo = new SmartGuiTextLabel(this));
 		;
@@ -54,8 +53,8 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 				updateText();
 			}
 		});
-		listChart.setButtonTexts(new String[] { I18n.format("gui.list.top"), I18n.format("gui.list.up"),
-				I18n.format("gui.list.down"), I18n.format("gui.list.bottom") });
+		listChart.setButtonTexts(new String[] { I18n.format("melodycraft.gui.list.top"), I18n.format("melodycraft.gui.list.up"),
+				I18n.format("melodycraft.gui.list.down"), I18n.format("melodycraft.gui.list.bottom") });
 		listChart.setItems(song.getCharts());
 		listChart.setDisplayFunction(e -> e.getInfoDifficulty());
 		if (song.getBgfile() == null) {
@@ -69,7 +68,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 				Minecraft.getMinecraft().displayGuiScreen(new GuiSettings(getSupreme()));
 			}
 		});
-		buttonSettings.setText(I18n.format("gui.settings"));
+		buttonSettings.setText(I18n.format("melodycraft.gui.settings"));
 
 		addComponent(buttonNext = new GuiMelodyCraftButton(this) {
 			@Override
@@ -78,7 +77,7 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 						MelodyCraftGameConfig.getInstance().getGlobal());
 			}
 		});
-		buttonNext.setText(I18n.format("gui.startgame"));
+		buttonNext.setText(I18n.format("melodycraft.gui.startgame"));
 		addKeyBinding(Keyboard.KEY_RETURN, buttonNext, false);
 	}
 
@@ -125,19 +124,19 @@ public class GuiSelectChart extends GuiMelodyCraftBase {
 			labelInfo.setText("");
 		} else {
 			String t = x.getInfo();
-			t = t + "\n" + I18n.format("gui.author", x.getAuthor());
-			t = t + "\n" + I18n.format("gui.mode", x.getModeName());
-			t = t + "\n" + I18n.format("gui.difficulty", Integer.toString(x.getDifficulty()));
-			t = t + "\n" + I18n.format("gui.date", x.getDate());
+			t = t + "\n" + I18n.format("melodycraft.gui.author", x.getAuthor());
+			t = t + "\n" + I18n.format("melodycraft.gui.mode", x.getModeName());
+			t = t + "\n" + I18n.format("melodycraft.gui.difficulty", Integer.toString(x.getDifficulty()));
+			t = t + "\n" + I18n.format("melodycraft.gui.date", x.getDate());
 
 			t = t + "\n\n";
 
 			PlayResult res = ResultManager.getInstance().getBestFor(x);
 
 			if (res == null) {
-				t = t + "\n" + I18n.format("gui.neverplayed");
+				t = t + "\n" + I18n.format("melodycraft.gui.neverplayed");
 			} else {
-				t = t + "\n" + I18n.format("gui.bestscore");
+				t = t + "\n" + I18n.format("melodycraft.gui.bestscore");
 				t = t + "\n" + res.getScore();
 				t = t + "\n" + res.getJudgeLevel().name() + "  " + res.accStr() + "  "
 						+ (res.checkAP() ? "AP" : (res.checkFC() ? "FC" : ""));
